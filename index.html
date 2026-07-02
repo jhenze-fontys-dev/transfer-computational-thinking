@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>def transfer(computationalThinking)</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+    :root { --accent: #2f5f98; --muted: #6b7280; }
+    body { max-width: 860px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    h1, h2, h3, h4 { line-height: 1.25; margin-top: 2.2em; color: #111827; }
+    h1 { border-bottom: 1px solid #e5e7eb; padding-bottom: .25em; }
+    a { color: var(--accent); }
+    img { max-width: 100%; height: auto; display: block; margin: 1.25rem auto; }
+    figure { margin: 2rem 0; }
+    figcaption { color: var(--muted); font-size: .92rem; text-align: center; }
+    pre, code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+    pre { overflow-x: auto; padding: 1rem; background: #f3f4f6; border-radius: 8px; }
+    table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+    th, td { border: 1px solid #d1d5db; padding: .45rem .6rem; vertical-align: top; }
+    blockquote { border-left: 4px solid #d1d5db; margin-left: 0; padding-left: 1rem; color: #374151; }
+    @media print { body { max-width: none; } }
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#inleiding" id="toc-inleiding">Inleiding</a>
+<ul>
+<li><a
+href="#probleemstelling-transfer-zonder-expliciete-context-in-de-bovenbouw"
+id="toc-probleemstelling-transfer-zonder-expliciete-context-in-de-bovenbouw">Probleemstelling:
+transfer zonder expliciete context in de bovenbouw</a>
+<ul>
+<li><a
+href="#computational-thinking-in-de-natuurwetenschappelijke-vakken-impliciet-maar-structureel."
+id="toc-computational-thinking-in-de-natuurwetenschappelijke-vakken-impliciet-maar-structureel.">Computational
+Thinking in de natuurwetenschappelijke vakken: impliciet maar
+structureel.</a></li>
+<li><a
+href="#mens-en-maatschappij-afwezigheid-van-computational-thinking-als-denkkader."
+id="toc-mens-en-maatschappij-afwezigheid-van-computational-thinking-als-denkkader.">Mens
+en Maatschappij: afwezigheid van Computational Thinking als
+denkkader.</a></li>
+<li><a
+href="#selectieve-positionering-in-plaats-van-vakoverstijgende-transfer."
+id="toc-selectieve-positionering-in-plaats-van-vakoverstijgende-transfer.">Selectieve
+positionering in plaats van vakoverstijgende transfer.</a></li>
+<li><a
+href="#de-curriculaire-paradox-van-computational-thinking-binnen-wiskunde."
+id="toc-de-curriculaire-paradox-van-computational-thinking-binnen-wiskunde.">De
+curriculaire paradox van Computational Thinking binnen
+wiskunde.</a></li>
+</ul></li>
+<li><a href="#doel-van-het-onderzoeksverslag-en-onderzoeksvraag"
+id="toc-doel-van-het-onderzoeksverslag-en-onderzoeksvraag">Doel van het
+onderzoeksverslag en onderzoeksvraag</a></li>
+</ul></li>
+<li><a href="#theoretisch-kader" id="toc-theoretisch-kader">Theoretisch
+kader</a>
+<ul>
+<li><a href="#computational-thinking-als-overdraagbare-denkstrategie"
+id="toc-computational-thinking-als-overdraagbare-denkstrategie">Computational
+Thinking als overdraagbare denkstrategie</a></li>
+<li><a
+href="#de-veranderde-positie-van-computational-thinking-binnen-digitale-geletterdheid"
+id="toc-de-veranderde-positie-van-computational-thinking-binnen-digitale-geletterdheid">De
+veranderde positie van Computational Thinking binnen Digitale
+Geletterdheid</a></li>
+<li><a href="#computational-thinking-binnen-de-kerndoelen-van-po-en-vo"
+id="toc-computational-thinking-binnen-de-kerndoelen-van-po-en-vo">Computational
+Thinking binnen de Kerndoelen van PO en VO</a></li>
+<li><a
+href="#de-zichtbaarheid-van-computational-thinking-als-curriculumvraagstuk"
+id="toc-de-zichtbaarheid-van-computational-thinking-als-curriculumvraagstuk">De
+zichtbaarheid van Computational Thinking als
+curriculumvraagstuk</a></li>
+<li><a href="#transfer-en-inert-knowledge"
+id="toc-transfer-en-inert-knowledge">Transfer en ‘inert
+knowledge’</a></li>
+<li><a href="#high-road-tranfer-en-metacognitie"
+id="toc-high-road-tranfer-en-metacognitie">High-road tranfer en
+metacognitie</a></li>
+<li><a href="#preperation-for-future-learning"
+id="toc-preperation-for-future-learning">Preperation for Future
+Learning</a></li>
+</ul></li>
+<li><a
+href="#didactisch-ontwerp-een-digitale-leeromgeving-voor-vakoverstijgend-computational-thinking"
+id="toc-didactisch-ontwerp-een-digitale-leeromgeving-voor-vakoverstijgend-computational-thinking">Didactisch
+ontwerp: een digitale leeromgeving voor vakoverstijgend Computational
+Thinking</a>
+<ul>
+<li><a href="#ontwerpprincipes"
+id="toc-ontwerpprincipes">Ontwerpprincipes</a></li>
+<li><a href="#computational-thinking-als-vakoverstijgend-handelen"
+id="toc-computational-thinking-als-vakoverstijgend-handelen">Computational
+Thinking als vakoverstijgend handelen</a></li>
+<li><a href="#feedback-zelfsturing-en-verantwoordelijkheid"
+id="toc-feedback-zelfsturing-en-verantwoordelijkheid">Feedback,
+zelfsturing en verantwoordelijkheid</a></li>
+</ul></li>
+<li><a
+href="#praktijkonderzoek-programmeren-als-vakdidactisch-hulpmiddel"
+id="toc-praktijkonderzoek-programmeren-als-vakdidactisch-hulpmiddel">Praktijkonderzoek:
+Programmeren als vakdidactisch hulpmiddel</a>
+<ul>
+<li><a href="#onderzoeksvraag"
+id="toc-onderzoeksvraag">Onderzoeksvraag</a></li>
+<li><a href="#onderzoekscontext"
+id="toc-onderzoekscontext">Onderzoekscontext</a></li>
+<li><a href="#onderzoeksopzet"
+id="toc-onderzoeksopzet">Onderzoeksopzet</a></li>
+<li><a href="#onderzoeksmateriaal"
+id="toc-onderzoeksmateriaal">Onderzoeksmateriaal</a></li>
+<li><a href="#observatie-instrument"
+id="toc-observatie-instrument">Observatie-instrument</a></li>
+<li><a href="#resultaten" id="toc-resultaten">Resultaten</a></li>
+</ul></li>
+<li><a
+href="#betekenis-van-de-resultaten-voor-computational-thinking-en-transfer"
+id="toc-betekenis-van-de-resultaten-voor-computational-thinking-en-transfer">Betekenis
+van de resultaten voor Computational Thinking en transfer</a>
+<ul>
+<li><a href="#programmeren-is-niet-hetzelfde-als-computational-thinking"
+id="toc-programmeren-is-niet-hetzelfde-als-computational-thinking">Programmeren
+is niet hetzelfde als Computational Thinking</a></li>
+<li><a href="#wat-betekenen-deze-resultaten-voor-transfer"
+id="toc-wat-betekenen-deze-resultaten-voor-transfer">Wat betekenen deze
+resultaten voor transfer?</a></li>
+<li><a
+href="#wat-betekenen-deze-resultaten-voor-het-ontwerp-van-leeromgevingen"
+id="toc-wat-betekenen-deze-resultaten-voor-het-ontwerp-van-leeromgevingen">Wat
+betekenen deze resultaten voor het ontwerp van leeromgevingen?</a></li>
+<li><a href="#wat-betekenen-deze-resultaten-voor-digitale-geletterdheid"
+id="toc-wat-betekenen-deze-resultaten-voor-digitale-geletterdheid">Wat
+betekenen deze resultaten voor Digitale Geletterdheid?</a></li>
+<li><a href="#synthese" id="toc-synthese">Synthese</a></li>
+</ul></li>
+<li><a href="#section" id="toc-section"><br />
+</a></li>
+<li><a href="#appendices" id="toc-appendices"> Appendices</a>
+<ul>
+<li><a href="#appendix-i-observatieformulier"
+id="toc-appendix-i-observatieformulier">Appendix I –
+Observatieformulier</a></li>
+<li><a href="#appendix-ii-overzichtstabel-observaties"
+id="toc-appendix-ii-overzichtstabel-observaties">Appendix II –
+Overzichtstabel observaties</a></li>
+<li><a href="#section-1" id="toc-section-1"></a></li>
+<li><a href="#section-2" id="toc-section-2"><img
+src="media/image3.png"
+style="width:8.95872in;height:3.29327in" /><br />
+</a></li>
+<li><a href="#appendix-iii-uitwerking-jupyter-notebook-opdracht"
+id="toc-appendix-iii-uitwerking-jupyter-notebook-opdracht">Appendix III
+– Uitwerking Jupyter Notebook Opdracht </a></li>
+<li><a href="#appendix-iv-python-module-documentatie"
+id="toc-appendix-iv-python-module-documentatie">Appendix IV – Python
+Module Documentatie </a></li>
+<li><a href="#appendix-v-leeromgeving"
+id="toc-appendix-v-leeromgeving">Appendix V – Leeromgeving </a></li>
+</ul></li>
+</ul>
+</nav>
+<p><img src="media/image1.png"
+style="width:8.26362in;height:11.67857in" /></p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>def transfer(computationalThinking):</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Define the function. Design the call.</td>
+</tr>
+<tr class="even">
+<td><p>Vakdidactisch ontwerponderzoek naar het ontwerpen van</p>
+<p>transfer binnen Computational Thinking</p></td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+<tr class="even">
+<td>Master Leraar Informatica Fontys Education</td>
+</tr>
+<tr class="odd">
+<td>Jack H.O. Henze</td>
+</tr>
+<tr class="even">
+<td>28 juni 2026</td>
+</tr>
+</tbody>
+</table>
+<p>Inhoudsopgave</p>
+<p><a href="#inleiding">1 Inleiding <span>2</span></a></p>
+<p><a
+href="#probleemstelling-transfer-zonder-expliciete-context-in-de-bovenbouw">1.1
+Probleemstelling: transfer zonder expliciete context in de bovenbouw
+<span>3</span></a></p>
+<p><a
+href="#computational-thinking-in-de-natuurwetenschappelijke-vakken-impliciet-maar-structureel.">1.1.1
+Computational Thinking in de natuurwetenschappelijke vakken: impliciet
+maar structureel. <span>3</span></a></p>
+<p><a
+href="#mens-en-maatschappij-afwezigheid-van-computational-thinking-als-denkkader.">1.1.2
+Mens en Maatschappij: afwezigheid van Computational Thinking als
+denkkader. <span>4</span></a></p>
+<p><a
+href="#selectieve-positionering-in-plaats-van-vakoverstijgende-transfer.">1.1.3
+Selectieve positionering in plaats van vakoverstijgende transfer.
+<span>5</span></a></p>
+<p><a
+href="#de-curriculaire-paradox-van-computational-thinking-binnen-wiskunde.">1.1.4
+De curriculaire paradox van Computational Thinking binnen wiskunde.
+<span>7</span></a></p>
+<p><a href="#doel-van-het-onderzoeksverslag-en-onderzoeksvraag">1.2 Doel
+van het onderzoeksverslag en onderzoeksvraag <span>8</span></a></p>
+<p><a href="#theoretisch-kader">2 Theoretisch kader
+<span>8</span></a></p>
+<p><a href="#computational-thinking-als-overdraagbare-denkstrategie">2.1
+Computational Thinking als overdraagbare denkstrategie
+<span>8</span></a></p>
+<p><a
+href="#de-veranderde-positie-van-computational-thinking-binnen-digitale-geletterdheid">2.2
+De veranderde positie van Computational Thinking binnen Digitale
+Geletterdheid <span>9</span></a></p>
+<p><a
+href="#computational-thinking-binnen-de-kerndoelen-van-po-en-vo">2.3
+Computational Thinking binnen de Kerndoelen van PO en VO
+<span>11</span></a></p>
+<p><a
+href="#de-zichtbaarheid-van-computational-thinking-als-curriculumvraagstuk">2.4
+De zichtbaarheid van Computational Thinking als curriculumvraagstuk
+<span>12</span></a></p>
+<p><a href="#transfer-en-inert-knowledge">2.5 Transfer en ‘inert
+knowledge’ <span>13</span></a></p>
+<p><a href="#high-road-tranfer-en-metacognitie">2.6 High-road tranfer en
+metacognitie <span>15</span></a></p>
+<p><a href="#preperation-for-future-learning">2.7 Preperation for Future
+Learning <span>17</span></a></p>
+<p><a
+href="#didactisch-ontwerp-een-digitale-leeromgeving-voor-vakoverstijgend-computational-thinking">3
+Didactisch ontwerp: een digitale leeromgeving voor vakoverstijgend
+Computational Thinking <span>18</span></a></p>
+<p><a href="#ontwerpprincipes">3.1 Ontwerpprincipes
+<span>18</span></a></p>
+<p><a href="#computational-thinking-als-vakoverstijgend-handelen">3.2
+Computational Thinking als vakoverstijgend handelen
+<span>19</span></a></p>
+<p><a href="#feedback-zelfsturing-en-verantwoordelijkheid">3.3 Feedback,
+zelfsturing en verantwoordelijkheid <span>20</span></a></p>
+<p><a
+href="#praktijkonderzoek-programmeren-als-vakdidactisch-hulpmiddel">4
+Praktijkonderzoek: Programmeren als vakdidactisch hulpmiddel
+<span>22</span></a></p>
+<p><a href="#onderzoeksvraag">4.1 Onderzoeksvraag
+<span>22</span></a></p>
+<p><a href="#onderzoekscontext">4.2 Onderzoekscontext
+<span>22</span></a></p>
+<p><a href="#onderzoeksopzet">4.3 Onderzoeksopzet
+<span>23</span></a></p>
+<p><a href="#onderzoeksmateriaal">4.4 Onderzoeksmateriaal
+<span>24</span></a></p>
+<p><a href="#observatie-instrument">4.5 Observatie-instrument
+<span>25</span></a></p>
+<p><a href="#resultaten">4.6 Resultaten <span>26</span></a></p>
+<p><a
+href="#betekenis-van-de-resultaten-voor-computational-thinking-en-transfer">5
+Betekenis van de resultaten voor Computational Thinking en transfer
+<span>27</span></a></p>
+<p><a
+href="#programmeren-is-niet-hetzelfde-als-computational-thinking">5.1
+Programmeren is niet hetzelfde als Computational Thinking
+<span>27</span></a></p>
+<p><a href="#wat-betekenen-deze-resultaten-voor-transfer">5.2 Wat
+betekenen deze resultaten voor transfer? <span>28</span></a></p>
+<p><a
+href="#wat-betekenen-deze-resultaten-voor-het-ontwerp-van-leeromgevingen">5.3
+Wat betekenen deze resultaten voor het ontwerp van leeromgevingen?
+<span>29</span></a></p>
+<p><a
+href="#wat-betekenen-deze-resultaten-voor-digitale-geletterdheid">5.4
+Wat betekenen deze resultaten voor Digitale Geletterdheid?
+<span>30</span></a></p>
+<p><a href="#synthese">5.5 Synthese <span>31</span></a></p>
+<p><a href="#_Toc233619003">Bibliography <span>I</span></a></p>
+<p><a href="#appendices">6 Appendices <span>IV</span></a></p>
+<p><a href="#appendix-i-observatieformulier">Appendix I –
+Observatieformulier <span>IV</span></a></p>
+<p><a href="#appendix-ii-overzichtstabel-observaties">Appendix II –
+Overzichtstabel observaties <span>V</span></a></p>
+<p><a href="#section-2"><span>V</span></a></p>
+<p><a href="#appendix-iii-uitwerking-jupyter-notebook-opdracht">Appendix
+III – Uitwerking Jupyter Notebook Opdracht <span>VI</span></a></p>
+<p><a href="#appendix-iv-python-module-documentatie">Appendix IV –
+Python Module Documentatie <span>XIV</span></a></p>
+<p><a href="#appendix-v-leeromgeving">Appendix V – Leeromgeving
+<span>XXII</span></a></p>
+<p>def transfer(computationalThinking):</p>
+<p>Als je de titel van dit artikel begrijpt, ben je voldoende Digitaal
+Geletterd en beheers je Computational Thinking voldoende om te herkennen
+wat hier gebeurt. Niet omdat je Python kunt programmeren, maar omdat je
+herkent dat hier een functie wordt gedefinieerd en niet uitgevoerd. Er
+wordt betekenis toegekend aan iets wat pas later, elders en vaak
+onzichtbaar haar werk zal doen. Dat is precies de kern van transfer.</p>
+<p>In de onderbouw is Digitale Geletterdheid en Computational Thinking
+zichtbaar. Het heeft een naam, een plek in het rooster, een docent,
+opdrachten. Leerlingen leren problemen opdelen, informatie beoordelen,
+patronen herkennen, nadenken over technologie en hun eigen handelen
+daarin. Het vak is expliciet. De functie wordt gedefinieerd.</p>
+<p>In de bovenbouw verandert dat. Niet omdat Digitale Geletterdheid en
+Computational Thinking minder belangrijk worden, maar juist omdat het
+zijn werk doet. Leerlingen analyseren bronnen bij geschiedenis,
+structureren gegevens bij biologie, automatiseren stappen bij wiskunde,
+reflecteren op technologie bij maatschappijleer. Niemand noemt het nog
+Digitale Geletterdheid en Computational Thinking, maar telkens kan
+daarbij dezelfde functie worden aangeroepen.</p>
+<p>Niet als losstaande vaardigheid, maar als vanzelfsprekend onderdeel
+van het denken.<br />
+Niet gekoppeld aan één docent, maar verweven in alle vakken.<br />
+Niet geoefend om het oefenen, maar ingezet om verder te komen.</p>
+<p>De bovenbouw vraagt geen herhaling van het vak maar herkenning van de
+functie.</p>
+<p>Leerlingen hoeven niet opnieuw te leren wat Digitale Geletterdheid of
+Computational Thinking is; ze moeten leren wanneer en waarom ze het
+inzetten. Succesvolle transfer laat zich dan ook niet meten aan
+zichtbaarheid, maar aan afwezigheid. Aan het moment waarop niemand meer
+vraagt welk vak dit is, omdat het antwoord overal hetzelfde is.</p>
+<p>In die zin schrijven we in de bovenbouw deze functie niet meer
+expliciet. Ze wordt aangeroepen in elk vak, zonder dat iemand haar naam
+nog noemt.</p>
+<p>transfer(computationalThinking)</p>
+<p>Niet omdat er niets gebeurt, maar omdat de functie volledig is
+opgenomen in de rest van het programma.</p>
+<h1 id="inleiding">Inleiding</h1>
+<p>De definitieve conceptkerndoelen Digitale Geletterdheid positioneren
+het leergebied als een samenhangend geheel van kennis en vaardigheden
+dat leerlingen voorbereidt op deelname aan een gedigitaliseerde
+samenleving. De formele reikwijdte van deze kerndoelen ligt daarbij bij
+het primair onderwijs en de onderbouw van het voortgezet onderwijs; de
+verdere uitwerking en toepassing in hogere leerjaren wordt niet
+expliciet vastgelegd (SLO, 2025f).</p>
+<p>Het bijbehorende toelichtingsdocument benadrukt dat kerndoelen
+richting geven aan het onderwijs, maar geen garantie vormen voor wat
+leerlingen daadwerkelijk leren of toepassen. De concrete invulling van
+het onderwijsaanbod ligt immers bij scholen zelf (SLO, 2025f). Dit
+impliceert dat de overdracht van Digitale Geletterdheid en Computational
+Thinking naar nieuwe vakcontexten niet automatisch is geborgd, maar
+afhankelijk wordt van keuzes op school- en docentniveau.</p>
+<p>In het debat over Digitale Geletterdheid stelt (Zegveld, 2022) dat
+het leergebied een vaste plek in het curriculum moet krijgen en
+geïntegreerd dient te worden binnen bestaande vakken, in plaats van als
+losstaand vak. Zij laat zien dat het gebruik van digitale toepassingen
+die aansluiten bij de leefwereld van leerlingen kan bijdragen aan
+motivatie en leren, en noemt voorbeelden binnen vakken als lezen en
+rekenen. (Smits, 2023) waarschuwt daarbij dat Digitale Geletterdheid het
+risico loopt te ‘weg-integreren’ wanneer zij niet expliciet wordt
+uitgewerkt, en richt zich met name op informatievaardigheden en begeleid
+internetgebruik.</p>
+<p>Een mogelijke kanttekening bij deze bijdragen is dat de auteurs
+vooral aandacht besteden aan herkenbare en direct toepasbare vormen van
+Digitale Geletterdheid. Meer abstracte en didactisch complexere
+onderdelen, zoals Computational Thinking en programmeren, blijven
+daarbij grotendeels buiten beeld. Dit kan erop wijzen dat juist deze
+minder grijpbare aspecten in de praktijk lastiger te integreren zijn en
+daardoor sneller buiten beschouwing blijven.</p>
+<p>In de context van de ontwikkeling van nieuwe examenprogramma’s wordt
+deze spanning verder zichtbaar. Digitale Geletterdheid zal naar
+verwachting niet als afzonderlijk examenvak worden opgenomen, maar
+geïntegreerd worden binnen bestaande vakken, terwijl de precieze wijze
+van examinering en toetsing nog grotendeels openligt (Kennisnet, 2022).
+Daarbij wordt expliciet benoemd dat onderdelen van Computational
+Thinking waarschijnlijk vooral binnen de bètavakken een plaats zullen
+krijgen. Deze positionering suggereert dat de inzet van Computational
+Thinking in andere vakcontexten, zoals economie of maatschappijleer,
+niet vanzelfsprekend wordt meegenomen in de verdere curriculum- en
+examenontwikkeling.</p>
+<p>Daarnaast wijst Kennisnet erop dat vakvernieuwingscommissies bij de
+uitwerking van examenprogramma’s relatief veel autonomie hebben. Zij
+ontvangen weliswaar een startnotitie, maar bepalen in hoge mate zelf hoe
+Digitale Geletterdheid en bijbehorende vaardigheden worden
+geïnterpreteerd en geïntegreerd binnen hun vakgebied (Kennisnet, 2022).
+Deze combinatie van integratie op vakniveau en vrijheid in interpretatie
+impliceert dat de aanwezigheid, diepgang en aard van Computational
+Thinking in de bovenbouw sterk kunnen verschillen per vak en
+profiel.</p>
+<p>Gezamenlijk versterken deze observaties het beeld dat juist de meer
+abstracte en didactisch complexere onderdelen van Digitale
+Geletterdheid, zoals Computational Thinking en programmeren, kwetsbaar
+zijn in de overgang naar de bovenbouw. Waar herkenbare en direct
+toepasbare digitale vaardigheden relatief eenvoudig kunnen worden
+geïntegreerd, dreigt Computational Thinking beperkt te blijven tot
+specifieke vakgebieden of profielen. Daarmee ontstaat de vraag in
+hoeverre</p>
+<p>Computational Thinking in de bovenbouw nog zichtbaar aanwezig is als
+vakoverstijgende denkvaardigheid, of dat deze vooral een plaats krijgt
+binnen afzonderlijke vakcontexten. Om deze vraag te verkennen wordt in
+de volgende paragraaf gekeken naar de positie van Computational Thinking
+binnen de concept-examenprogramma's van verschillende
+bovenbouwvakken.</p>
+<h2 class="unnumbered"
+id="probleemstelling-transfer-zonder-expliciete-context-in-de-bovenbouw">Probleemstelling:
+transfer zonder expliciete context in de bovenbouw</h2>
+<p>In de bovenbouw van het voortgezet onderwijs verschuift de
+positionering van Digitale Geletterdheid en Computational Thinking ten
+opzichte van de onderbouw fundamenteel. Waar deze kennis en vaardigheden
+in de conceptkerndoelen expliciet worden benoemd als samenhangend
+leergebied, worden zij in de bovenbouw niet langer expliciet als zodanig
+benoemd. In plaats daarvan verschijnen zij uitsluitend ingebed in
+vakspecifieke beschrijvingen van inhoud, werkwijzen en eindtermen.</p>
+<h3
+id="computational-thinking-in-de-natuurwetenschappelijke-vakken-impliciet-maar-structureel.">Computational
+Thinking in de natuurwetenschappelijke vakken: impliciet maar
+structureel.</h3>
+<p>In het <em>toelichtingsdocument bij de conceptexamenprogramma’s voor
+de natuurwetenschappelijke vakken</em> wordt expliciet gesteld dat “de
+meeste aandacht voor Digitale Geletterdheid zit in het domein
+Werkwijzen” en dat deze aandacht zichtbaar is in eindtermen over
+“modellen, data, iteratief onderzoeken en ontwerpen en het gebruiken van
+digitale instrumenten” (SLO, 2026d). Digitale Geletterdheid wordt
+daarmee niet uitgewerkt als een vakoverstijgend denkkader, maar
+functioneel gepositioneerd binnen de uitvoering van
+natuurwetenschappelijke praktijken.</p>
+<p>Dit patroon is consistent zichtbaar in de afzonderlijke
+conceptexamenprogramma’s voor biologie, natuurkunde, scheikunde en
+Onderzoek &amp; Ontwerpen (O&amp;O). In alle vier programma's spelen
+modelleren, systematisch onderzoeken, ontwerpen en het werken met data
+en digitale instrumenten een centrale rol, maar steeds expliciet
+verbonden aan vakspecifieke inhoud en context (SLO, 2026a, 2026b, 2026c,
+2025a). Computational Thinking of computationele vaardigheden worden
+daarbij niet als zelfstandige of overkoepelende denkvaardigheid benoemd,
+maar impliciet verondersteld binnen deze werkwijzen.</p>
+<p>Daarnaast wordt in het toelichtingsdocument aangegeven dat de
+conceptexamenprogramma’s “aansluiten op de conceptkerndoelen
+vo-onderbouw” en dat “sommige inhouden als bekende voorkennis
+verondersteld kunnen worden bij de beschrijving van de eindtermen” (SLO,
+2026d). Daarmee wordt impliciet aangenomen dat leerlingen beschikken
+over relevante denkvaardigheden uit de onderbouw, zonder dat wordt
+geëxpliciteerd hoe deze voorkennis in de bovenbouw opnieuw wordt
+geactiveerd, herkend of verdiept.</p>
+<p>Opvallend is dat de term <em>Computational Thinking</em> in geen van
+deze documenten expliciet voorkomt. Hoewel verwante activiteiten
+structureel aanwezig zijn, ontbreekt een expliciete positionering van
+Computational Thinking als herkenbare, overdraagbare denkstrategie.
+Hierdoor functioneert Computational Thinking in de
+natuurwetenschappelijke vakken vooral als impliciet raamwerk dat
+samenvalt met vakspecifiek handelen, in plaats van als expliciet
+benoemde denkvaardigheid die vakoverstijgend kan worden ingezet.</p>
+<h3
+id="mens-en-maatschappij-afwezigheid-van-computational-thinking-als-denkkader.">Mens
+en Maatschappij: afwezigheid van Computational Thinking als
+denkkader.</h3>
+<p>Een ander patroon wordt zichtbaar in de startnotitie voor het
+leergebied Mens en Maatschappij, die richtinggevend is voor de
+ontwikkeling van toekomstige examenprogramma’s. In dit document
+ontbreekt Computational Thinking volledig als expliciet benoemde
+denkvaardigheid. Ook verwante termen zoals programmeren, algoritmisch
+denken of computationele probleemformulering komen niet voor (SLO,
+2024).</p>
+<p>Digitale Geletterdheid wordt in deze startnotitie slechts beperkt en
+fragmentarisch genoemd, en dan voornamelijk in relatie tot informatie-
+en mediavaardigheden, zoals het “omgaan met digitale media en
+desinformatie”, het “kritisch beoordelen van bronnen” en “de invloed van
+ICT- en AI-toepassingen op het denken en de lees- en schrijfvaardigheid
+van leerlingen” (SLO, 2024). Digitale technologie fungeert hier primair
+als maatschappelijke context, niet als cognitief of didactisch
+kader.</p>
+<p>Hoewel de startnotitie wel hogere-orde denkvaardigheden benoemt,
+gebeurt dit consequent binnen vakspecifieke kaders. Zo wordt gesproken
+over “historisch denken en redeneren” in geschiedenis, “complexe
+denkvaardigheden als creatief en kritisch denken” in filosofie, en
+“modelmatig werken” in economie (SLO, 2024). Wat daarbij ontbreekt, is
+een expliciete verbinding tussen deze denkpraktijken en een
+overkoepelend denkkader zoals Computational Thinking.</p>
+<p>Hoewel de startnotitie aangeeft voort te bouwen op eerdere
+curriculaire documenten, waaronder de actualisatie van de kerndoelen uit
+2023 (SLO, 2024), wordt niet uitgewerkt welke denkvaardigheden uit het
+leergebied Digitale Geletterdheid als voorkennis worden verondersteld in
+de bovenbouw. Daarmee blijft onduidelijk of — en op welke wijze —
+Computational Thinking als opgebouwde denkvaardigheid wordt meegenomen
+in de verdere uitwerking van de maatschappijvakken.</p>
+<h3
+id="selectieve-positionering-in-plaats-van-vakoverstijgende-transfer.">Selectieve
+positionering in plaats van vakoverstijgende transfer.</h3>
+<p>Gezamenlijk laten deze documenten zien dat Computational Thinking in
+de bovenbouw niet verdwijnt, maar selectief wordt gepositioneerd. In de
+natuurwetenschappelijke vakken blijft het denkmatige en conceptuele
+karakter van Computational Thinking impliciet aanwezig binnen werkwijzen
+zoals modelleren en datagebruik. In het leergebied Mens en Maatschappij
+daarentegen raakt dit abstracte en probleemformulerende karakter
+grotendeels op de achtergrond, terwijl het gebruik en de
+maatschappelijke context van digitale middelen centraal blijven
+staan.</p>
+<p>Deze verschillen suggereren dat Computational Thinking in de
+bovenbouw niet wordt benaderd als een vakoverstijgende denkstrategie,
+maar als een vaardigheid die primair thuishoort binnen
+bèta-georiënteerde vakken. Daarmee ontstaat een situatie waarin
+Computational Thinking functioneert als een achteraf toe te kennen label
+bij bepaalde vakspecifieke praktijken, in plaats van als een
+overdraagbaar denkkader dat leerlingen ondersteunt bij
+probleemformulering en analyse in uiteenlopende vakcontexten.</p>
+<p>Juist deze selectieve en impliciete positionering vormt het
+kernprobleem van dit onderzoeksverslag. De vraag is niet of
+Computational Thinking in de bovenbouw aanwezig is, maar of het
+curriculum expliciet voorwaarden schept voor vakoverstijgende transfer.
+In de huidige documenten blijft deze transfer grotendeels onbenoemd,
+onondersteund en afhankelijk van individuele interpretatie door
+vakcommissies, scholen en docenten.</p>
+<p>In tegenstelling tot de natuurwetenschappelijke vakken en het
+leergebied Mens en Maatschappij wordt Computational Thinking binnen
+wiskunde niet volledig impliciet gelaten of geheel afwezig. In het
+Toelichtingsdocument conceptexamenprogramma wiskunde wordt Computational
+Thinking expliciet benoemd als onderdeel van bredere maatschappelijke en
+technologische ontwikkelingen. Zo wordt gesteld dat leerlingen moeten
+leren omgaan met “digitale technologieën en computationeel denken”(SLO,
+2025g).</p>
+<p>Deze expliciete benoeming suggereert op het eerste gezicht een
+erkenning van Computational Thinking als relevante denkvaardigheid. In
+dezelfde paragraaf wordt Computational Thinking echter direct nader
+ingevuld binnen een wiskundig en instrumenteel kader. Het document
+omschrijft Computational Thinking als het vermogen dat “de leerling zich
+bewust is van de mogelijkheden die ICT biedt voor het oplossen van
+problemen en hiervan gebruik maakt” (SLO, 2025g). Daarmee wordt
+Computational Thinking niet gepositioneerd als een vakoverstijgend
+denkkader voor probleemformulering en abstractie, maar als het
+functioneel inzetten van ICT binnen het oplossen van wiskundige
+problemen.</p>
+<p>Deze positionering wordt structureel doorgezet in de afzonderlijke
+conceptexamenprogramma’s voor wiskunde Natuur &amp; Techniek, Natuur
+&amp; Gezondheid, Economie &amp; Maatschappij en Cultuur &amp;
+Maatschappij. In alle vier de programma’s wordt Computational Thinking
+ondergebracht binnen Subdomein B5: Digitaal wiskundig gereedschap (SLO,
+2025c, 2025b, 2025d, 2025e). In dit subdomein ligt de nadruk op het
+leren gebruiken van digitale hulpmiddelen ter ondersteuning van
+wiskundige activiteiten. Het bijbehorende toelichtingsdocument maakt
+deze keuze expliciet door te stellen dat de tijd die nodig is om
+digitaal gereedschap te leren gebruiken wordt gezien als "een
+investering in wiskundig denken en een uitbreiding van de wiskundige
+vaardigheid en computationeel denken" (SLO, 2025g, pp. 44–45).</p>
+<p>Wat hier zichtbaar wordt, is geen impliciete veronderstelling van
+Computational Thinking, maar een expliciete herdefinitie ervan.
+Computational Thinking wordt binnen wiskunde niet gepositioneerd als een
+algemeen overdraagbare manier van denken, maar als een uitbreiding van
+wiskundige vaardigheid en het gebruik van digitale tools binnen het vak.
+Daarmee verliest Computational Thinking zijn functie als herkenbaar en
+vakoverstijgend denkkader en wordt het inhoudelijk herschreven naar
+vakspecifieke terminologie en doelstellingen.</p>
+<p>Deze herdefinitie heeft directe gevolgen voor de mogelijkheid tot
+transfer. Doordat Computational Thinking expliciet wordt gekoppeld aan
+wiskundige probleemoplossing en digitaal gereedschap, verdwijnt de
+herkenbaarheid van Computational Thinking als algemene denkstrategie.
+Leerlingen leren niet dat zij een overdraagbare manier van denken
+toepassen, maar dat zij binnen wiskunde werken met specifieke
+hulpmiddelen en werkwijzen. Daarmee wordt Computational Thinking niet
+voortgezet, maar inhoudelijk vervangen.</p>
+<p>In termen van de metafoor uit het voorwoord wordt de functie hier
+niet aangeroepen, maar overschreven:</p>
+<p>print(transfer(computationalThinking))</p>
+<p># -&gt; "wiskundige vaardigheid met digitale tools"</p>
+<p>Waar Computational Thinking in de onderbouw wordt gedefinieerd als
+een algemeen inzetbare manier van probleemformulerend denken, krijgt
+dezelfde functie binnen wiskunde in de bovenbouw een nieuwe,
+vakspecifieke betekenis. Daarmee wordt niet voldaan aan de voorwaarden
+voor vakoverstijgende transfer, maar wordt deze transfer structureel
+bemoeilijkt. Deze observatie vormt een cruciale schakel in het verdere
+betoog en leidt direct naar de vraag wat onder Computational Thinking
+moet worden verstaan, wanneer het wordt opgevat in de oorspronkelijke
+betekenis zoals geformuleerd door Wing, een vooraanstaande Amerikaanse
+hoogleraar in Computer Science die de term Computational Thinking
+wereldwijd heeft geïntroduceerd..</p>
+<h3
+id="de-curriculaire-paradox-van-computational-thinking-binnen-wiskunde.">De
+curriculaire paradox van Computational Thinking binnen wiskunde.</h3>
+<p>Onderzoek naar probleemoplossen in het Nederlandse wiskundeonderwijs
+laat zien dat leerlingen wel beschikken over wiskundige kennis, maar
+moeite hebben om deze kennis te herkennen en toe te passen in
+niet-routinematige en contextoverstijgende situaties. Internationale
+vergelijkingen op basis van PISA 2003 tonen aan dat Nederlandse
+leerlingen relatief hoog scoren op wiskundige vaardigheden, maar
+significant lager op probleemoplossing, waarbij het verschil tussen deze
+domeinen groter is dan in andere deelnemende landen (Doorman et al.,
+2007).</p>
+<p>Analyse van leerlingwerk laat zien dat dit verschil niet wordt
+veroorzaakt door een gebrek aan kennis. Leerlingen begrijpen de opgaven
+en beschikken over de benodigde rekenkundige vaardigheden, maar starten
+niet, schrijven weinig of niets op, of geven snel op wanneer problemen
+afwijken van bekende wiskundige routines. De zwakte ligt daarmee niet in
+wat leerlingen weten, maar in het herkennen, volhouden en overdragen van
+strategieën buiten de vertrouwde context (Doorman et al., 2007).</p>
+<p>De auteurs plaatsen deze bevinding expliciet in relatie tot het
+onderwijsontwerp. Niet-routinematig probleemoplossen krijgt een
+marginale plaats in lesmethodes en ontbreekt grotendeels in centrale
+examens. Daardoor wordt het niet ontwikkeld als herkenbaar onderdeel van
+wiskundig denken. Wanneer dergelijke vaardigheden niet nodig zijn voor
+toetsing, kan volgens Doorman et al. niet worden verwacht dat zij
+structureel aandacht krijgen in het onderwijs (Doorman et al.,
+2007).</p>
+<p>Deze bevindingen zijn direct relevant voor de positionering van
+Computational Thinking binnen wiskunde. Wanneer Computational Thinking
+in de bovenbouw expliciet wordt geherdefinieerd als vakspecifiek
+gereedschap en uitbreiding van wiskundige vaardigheid, bestaat het
+risico dat een bestaand patroon van contextgebondenheid wordt voortgezet
+of zelfs versterkt. Denkstrategieën worden wel uitgevoerd binnen het
+vak, maar niet herkend als overdraagbaar naar andere domeinen.</p>
+<p>Hier ontstaat een curriculaire paradox. Computational Thinking is
+bedoeld als een vakoverstijgend denkkader dat leerlingen ondersteunt bij
+probleemformulering en analyse in uiteenlopende contexten.
+Tegelijkertijd wordt dit denkkader ondergebracht binnen een vak waarin
+empirisch is aangetoond dat leerlingen juist moeite hebben om
+denkstrategieën los te maken van vakspecifieke routines. Daarmee wordt
+een strategie die bedoeld is om contexten te overstijgen,
+geherdefinieerd binnen een domein waar transfer aantoonbaar
+problematisch is.</p>
+<p>De paradox is dus niet dat Computational Thinking wordt geïntegreerd
+in wiskunde, maar dat een denkstrategie die overdraagbaarheid
+veronderstelt, wordt herschreven binnen een vak dat zelf worstelt met
+overdraagbaarheid van denken.</p>
+<p>De onvermijdelijke vraag die dit oproept is dan ook:</p>
+<p><em>Is een vak waarin transfer aantoonbaar problematisch is, de meest
+aangewezen plek om een vakoverstijgend denkkader te
+herdefiniëren?</em></p>
+<p>print(0.1 + 0.2 == 0.3)</p>
+<p># False</p>
+<h2 class="unnumbered"
+id="doel-van-het-onderzoeksverslag-en-onderzoeksvraag">Doel van het
+onderzoeksverslag en onderzoeksvraag</h2>
+<p>Onderzoeksvraag:</p>
+<p><em>Hoe beïnvloedt het ontbreken van expliciete aandacht voor
+transfer de vakoverstijgende toepasbaarheid van Computational Thinking
+in de bovenbouw?</em></p>
+<h1 id="theoretisch-kader">Theoretisch kader</h1>
+<h2 class="unnumbered"
+id="computational-thinking-als-overdraagbare-denkstrategie">Computational
+Thinking als overdraagbare denkstrategie</h2>
+<p><em>"Computational Thinking is het denkproces waarmee problemen en
+hun oplossingen zo worden geformuleerd dat ze kunnen worden
+gepresenteerd in een vorm die effectief kan worden uitgevoerd door een
+informatie-verwerkende tussenpersoon, zoals een computer of een mens –
+of door beiden gezamenlijk als geen van beiden het probleem alleen kan
+oplossen"</em> (Wing, 2020)<em>.</em></p>
+<p>Deze definitie plaatst Computational Thinking nadrukkelijk buiten de
+context van programmeren alleen. Niet het schrijven van code staat
+centraal, maar het denkproces waarmee problemen worden geanalyseerd,
+gestructureerd en geformuleerd op een wijze die uitvoerbare oplossingen
+mogelijk maakt. De nadruk ligt daarbij op het organiseren van
+informatie, het herkennen van relevante kenmerken van een probleem en
+het ontwikkelen van een aanpak die systematisch kan worden
+uitgevoerd.</p>
+<p>Deze benadering sluit aan bij Wings eerdere beschrijving van
+Computational Thinking als een fundamentele manier van denken die breder
+is dan programmeervaardigheid alleen. In haar invloedrijke essay uit
+2006 stelt zij expliciet dat “thinking like a computer scientist means
+more than being able to program a computer” (Wing, 2006). Computational
+Thinking wordt daarmee niet gepositioneerd als een technische
+vaardigheid, maar als een manier om complexe vraagstukken te benaderen
+en op te lossen.</p>
+<p>Om deze manier van denken concreter te maken, werken (Selby &amp;
+Woollard, 2013) de definitie van Wing verder uit tot een samenhangend
+geheel van cognitieve denkvaardigheden. Zij onderscheiden abstractie,
+decompositie, algoritmisch denken, generalisatie en evaluatie als de
+centrale componenten van Computational Thinking. Gezamenlijk beschrijven
+deze vaardigheden een proces waarbij complexe problemen worden
+vereenvoudigd, gestructureerd en vertaald naar oplossingsstrategieën die
+ook in andere situaties toepasbaar kunnen zijn.</p>
+<p>Binnen deze benadering kan Computational Thinking worden opgevat als
+een samenhangend denkkader dat niet gebonden is aan een specifieke
+programmeertaal, technologie of vakcontext. Programmeren kan worden
+ingezet om oplossingen uit te voeren, maar vormt niet de essentie van
+Computational Thinking zelf. De kern ligt in de onderliggende
+denkprocessen waarmee problemen worden geanalyseerd en oplossingen
+worden ontworpen.</p>
+<p>Deze positie van Computational Thinking als samenhangende
+denkstrategie is van belang voor het huidige onderzoek. Wanneer
+Computational Thinking wordt beschouwd als een overdraagbaar denkkader,
+ontstaat immers de verwachting dat leerlingen deze denkvaardigheden ook
+buiten de oorspronkelijke leercontext kunnen herkennen en toepassen. De
+vraag in hoeverre Computational Thinking vakoverstijgend inzetbaar is,
+hangt daarmee samen met de wijze waarop deze denkstrategie binnen het
+onderwijs wordt gepositioneerd en ontwikkeld.</p>
+<p>Om die reden is het relevant te onderzoeken hoe Computational
+Thinking binnen het leergebied Digitale Geletterdheid wordt beschreven.
+In de volgende paragraaf wordt daarom onderzocht hoe SLO Computational
+Thinking positioneerde binnen de oorspronkelijke domeinstructuur van
+Digitale Geletterdheid en hoe deze positionering in recente
+curriculumdocumenten is veranderd.</p>
+<h2 class="unnumbered"
+id="de-veranderde-positie-van-computational-thinking-binnen-digitale-geletterdheid">De
+veranderde positie van Computational Thinking binnen Digitale
+Geletterdheid</h2>
+<p>Computational Thinking neemt binnen de recente ontwikkeling van
+Digitale Geletterdheid een opvallende positie in. Hoewel de inhoudelijke
+beschrijving van Computational Thinking grotendeels behouden blijft, is
+de wijze waarop deze binnen het curriculum wordt gepresenteerd in de
+loop van de tijd veranderd.</p>
+<p>In eerdere beschrijvingen van Digitale Geletterdheid positioneerde
+SLO Computational Thinking als één van de vier domeinen van het
+leergebied, naast ICT-basisvaardigheden, mediawijsheid en digitale
+informatievaardigheden (SLO, 2023). Computational Thinking werd daarbij
+gedefinieerd als:</p>
+<p><em>"denkvaardigheden en strategieën die helpen bij het
+(her)formuleren van complexe problemen zodat een computer kan bijdragen
+aan het oplossen"</em>(SLO, 2023)<em>.</em></p>
+<p>Deze definitie sluit nauw aan bij de beschrijvingen van (Wing, 2006,
+2020) en (Selby &amp; Woollard, 2013). Binnen dezelfde
+domeinbeschrijving werkte SLO Computational Thinking verder uit in vijf
+samenhangende onderdelen: data en dataverwerking, decompositie,
+patroonherkenning, abstractie en algoritmes (SLO, 2023). Computational
+Thinking werd daarmee gepresenteerd als een herkenbaar en samenhangend
+geheel van denkvaardigheden dat leerlingen ondersteunt bij het
+analyseren van problemen en het ontwikkelen van
+oplossingsstrategieën.</p>
+<p>Bij de ontwikkeling van de nieuwe kerndoelen Digitale Geletterdheid
+is deze domeinstructuur gewijzigd. SLO geeft aan dat de oorspronkelijke
+indeling in vier domeinen bruikbaar was, maar dat veel onderwerpen
+aspecten uit meerdere domeinen bevatten en daardoor niet eenduidig
+binnen één domein konden worden geplaatst. Om die reden is gekozen voor
+een nieuwe indeling in drie domeinen: Praktische kennis en vaardigheden,
+Ontwerpen en maken en De gedigitaliseerde wereld (SLO, 2026e).</p>
+<p>Opvallend is dat SLO daarbij expliciet aangeeft dat het niet gaat om
+nieuwe inhoud, maar om een andere ordening van bestaande inhoud. De
+onderwerpen uit de oorspronkelijke vier domeinen blijven volgens SLO
+aanwezig binnen de nieuwe structuur, ook wanneer zij niet langer als
+afzonderlijk domein herkenbaar zijn (SLO, 2026e).</p>
+<p>Voor Computational Thinking betekent dit dat de inhoudelijke
+beschrijving grotendeels behouden blijft, terwijl de zichtbaarheid van
+Computational Thinking als zelfstandig domein afneemt. Waar eerdere
+beschrijvingen Computational Thinking presenteerden als een samenhangend
+geheel van denkvaardigheden en strategieën, verschijnt het in de huidige
+kerndoelen vooral als een onderliggende denkstrategie die binnen
+verschillende contexten wordt toegepast.</p>
+<p>Deze verschuiving vormt een belangrijk uitgangspunt voor het huidige
+onderzoek. Wanneer Computational Thinking niet langer zichtbaar wordt
+gepresenteerd als afzonderlijk denkkader, ontstaat de vraag in hoeverre
+leerlingen en docenten deze denkvaardigheden nog herkennen als een
+samenhangend geheel. Om die vraag verder te onderzoeken, wordt in de
+volgende paragraaf gekeken hoe Computational Thinking concreet
+terugkeert binnen de kerndoelen van het primair en voortgezet
+onderwijs.</p>
+<h2 class="unnumbered"
+id="computational-thinking-binnen-de-kerndoelen-van-po-en-vo">Computational
+Thinking binnen de Kerndoelen van PO en VO</h2>
+<p>Binnen de huidige kerndoelen voor het primair en voortgezet onderwijs
+verschijnt Computational Thinking vooral als iets dat leerlingen
+gebruiken, en minder als iets dat zij expliciet leren herkennen als
+samenhangend denkkader.</p>
+<p>In zowel de conceptkerndoelen voor het primair onderwijs als voor het
+voortgezet onderwijs wordt op verschillende plaatsen verwezen naar
+computationele denkstrategieën. Leerlingen gebruiken deze
+denkstrategieën bijvoorbeeld bij het ontwerpen van digitale producten,
+het programmeren van computerprogramma's en het oplossen van problemen
+binnen een vakcontext. De nadruk ligt daarbij vooral op situaties waarin
+computationele denkstrategieën worden toegepast.</p>
+<p>Deze observatie sluit aan bij de karakteristiek van het leergebied
+Digitale Geletterdheid. Hierin beschrijft SLO dat leerlingen
+computationele denkstrategieën ontwikkelen tijdens activiteiten zoals
+programmeren, ontwerpen en het aanpakken van problemen of taken.
+Computational Thinking wordt daarmee niet primair gepositioneerd als een
+afzonderlijk leerobject, maar als iets dat zich ontwikkelt tijdens
+andere leeractiviteiten.</p>
+<p>Opvallend is dat componenten die in eerdere beschrijvingen van
+Computational Thinking centraal stonden, zoals decompositie,
+patroonherkenning, abstractie, algoritmisch denken en data-analyse, in
+de kerndoelen zelf slechts beperkt expliciet zichtbaar zijn als
+afzonderlijke denkvaardigheden. De nadruk ligt voornamelijk op het
+uitvoeren van activiteiten waarin dergelijke denkstrategieën een rol
+kunnen spelen.</p>
+<p>Deze wijze van beschrijven heeft belangrijke gevolgen voor de
+interpretatie van Computational Thinking binnen het curriculum. Wanneer
+computationele denkstrategieën vooral zichtbaar worden in hun
+toepassing, ontstaat de vraag in hoeverre leerlingen deze
+denkstrategieën ook leren herkennen als een samenhangend geheel. Het
+onderscheid tussen het uitvoeren van een activiteit en het bewust
+herkennen van de onderliggende denkstrategie wordt hierbij relevant.</p>
+<p>Vanuit het perspectief van transfer is dit een interessante
+observatie. Verschillende transfertheorieën benadrukken dat
+overdraagbaarheid samenhangt met het herkennen van onderliggende
+concepten en strategieën en het bewust opnieuw kunnen inzetten daarvan
+in een nieuwe context. Wanneer computationele denkstrategieën
+voornamelijk impliciet worden ontwikkeld tijdens andere activiteiten,
+ontstaat de vraag in hoeverre leerlingen deze denkstrategieën later ook
+herkennen als overdraagbaar denkkader.</p>
+<p>Op basis van de kerndoelen kan niet worden geconcludeerd dat transfer
+van Computational Thinking onmogelijk is. Wel lijkt de expliciete opbouw
+van Computational Thinking als herkenbare en overdraagbare denkstrategie
+binnen de huidige kerndoelstructuur minder zichtbaar dan in eerdere
+beschrijvingen waarin Computational Thinking als afzonderlijk domein
+werd gepositioneerd. Deze spanning tussen ontwikkelen, herkennen en
+toepassen vormt een belangrijk uitgangspunt voor de transfertheorieën
+die in de volgende paragrafen worden besproken.</p>
+<h2 class="unnumbered"
+id="de-zichtbaarheid-van-computational-thinking-als-curriculumvraagstuk">De
+zichtbaarheid van Computational Thinking als curriculumvraagstuk</h2>
+<p>De verschuiving van Computational Thinking van een expliciet domein
+naar een onderliggende denkstrategie roept de vraag op in hoeverre de
+gekozen curriculumstructuur van invloed is op de herkenbaarheid van
+Computational Thinking als overdraagbaar denkkader.</p>
+<p>SLO stelt dat de gekozen domeinindeling binnen Digitale Geletterdheid
+voor het onderwijs van ondergeschikt belang is. Volgens SLO gaat het in
+alle gevallen om dezelfde onderwerpen en zullen in leerlijnen,
+leeractiviteiten en lessen vaak aspecten uit meerdere domeinen
+tegelijkertijd aan de orde komen (SLO, 2026e):</p>
+<p><em>"Het is goed je te realiseren dat voor onderwijs in Digitale
+Geletterdheid het niet van belang is volgens welk model je inhouden of
+doelen indeelt. Het gaat in alle gevallen om dezelfde onderwerpen en bij
+het samenstellen van leerlijnen, leeractiviteiten en lessen zul je in
+veel gevallen aspecten uit meerdere domeinen aan de orde stellen,
+ongeacht van welke indeling je gebruikmaakt."<br />
+</em>(SLO, 2026e)<em>.</em></p>
+<p>Vanuit curriculumontwikkeling is deze redenering begrijpelijk.
+Wanneer dezelfde inhoud behouden blijft, hoeft een wijziging in de
+domeinstructuur niet noodzakelijk te leiden tot veranderingen in de
+onderwijspraktijk. De vraag is echter of dit ook geldt wanneer het doel
+is dat leerlingen onderliggende denkstrategieën leren herkennen en later
+opnieuw kunnen toepassen in een andere context.</p>
+<p>Juist vanuit transferperspectief krijgt de wijze waarop kennis wordt
+georganiseerd een andere betekenis. Verschillende theorieën over
+transfer benadrukken dat overdraagbaarheid samenhangt met het herkennen
+van onderliggende concepten, principes en denkstrategieën. Niet alleen
+de inhoud die wordt geleerd is daarbij van belang, maar ook de wijze
+waarop deze inhoud voor leerlingen zichtbaar en herkenbaar wordt
+gemaakt.</p>
+<p>Voor Computational Thinking is deze vraag bijzonder relevant. Waar
+eerdere beschrijvingen van Digitale Geletterdheid Computational Thinking
+presenteerden als een afzonderlijk domein met een eigen begrippenkader,
+verschijnt deze inhoud in de huidige kerndoelen verspreid over meerdere
+domeinen en leeractiviteiten. Vanuit transferperspectief ontstaat
+daardoor de vraag in hoeverre leerlingen en docenten Computational
+Thinking nog herkennen als een samenhangend en overdraagbaar
+denkkader.</p>
+<p>Deze spanning tussen inhoudelijke continuïteit, herkenbaarheid van
+denkstrategieën en vakoverstijgende toepasbaarheid loopt als een rode
+draad door de verschillende vragen die in dit onderzoek centraal staan.
+De voorgaande paragrafen laten zien dat Computational Thinking binnen de
+huidige curriculumdocumenten aanwezig blijft, maar dat vragen ontstaan
+over de wijze waarop deze denkstrategie wordt ontwikkeld, herkend en
+later opnieuw ingezet.</p>
+<p>Deze observaties raken direct aan de centrale onderzoeksvraag van dit
+artikel: hoe het ontbreken van expliciete aandacht voor transfer de
+vakoverstijgende toepasbaarheid van Computational Thinking kan
+beïnvloeden. Om deze vraag theoretisch te kunnen duiden, wordt in de
+volgende paragrafen ingegaan op verschillende theorieën over transfer
+van kennis en vaardigheden.</p>
+<h2 class="unnumbered" id="transfer-en-inert-knowledge">Transfer en
+‘inert knowledge’</h2>
+<p>Al in het begin van de twintigste eeuw waarschuwde Alfred North
+Whitehead voor een onderwijsprobleem dat opvallend herkenbaar blijft.
+Hij introduceerde het begrip inert ideas voor kennis die wel wordt
+aangeleerd, maar geen rol speelt in denken of handelen. Whitehead
+omschrijft deze ideeën als kennis die “wordt opgenomen zonder te worden
+gebruikt, getest of opnieuw gecombineerd” (Whitehead, 1929). Het
+probleem is volgens hem niet dat leerlingen niets leren, maar dat wat
+zij leren niet functioneert buiten de context waarin het is
+aangeleerd.</p>
+<p>Whitehead verzet zich expliciet tegen onderwijs waarin kennis wordt
+losgekoppeld van toepassing. Hij stelt dat de tegenstelling tussen
+theorie en praktijk kunstmatig is en dat onderwijs juist tekortschiet
+wanneer abstracte kennis wordt aangeboden zonder dat leerlingen ervaren
+wat zij ermee kunnen doen. Wanneer ideeën niet worden ingezet, blijven
+zij inert: aanwezig, maar niet beschikbaar. In zijn woorden is onderwijs
+dan gevuld met kennis “die niet functioneert wanneer zij nodig is”
+(Whitehead, 1929).</p>
+<p>Tegelijkertijd benadrukt Whitehead dat dit probleem niet wordt
+opgelost door toepassing centraal te stellen zonder aandacht voor
+inhoudelijke beheersing. Denken ontstaat niet uit handeling alleen, maar
+uit de wisselwerking tussen begrip en gebruik. Ideeën krijgen pas
+betekenis wanneer zij worden toegepast, maar toepassing zonder begrip
+leidt niet tot inzicht. Onderwijs dat te snel abstraheert zonder
+ervaring, én onderwijs dat uitsluitend inzet op doen zonder conceptuele
+verdieping, loopt volgens Whitehead vast.</p>
+<p>Deze analyse is direct relevant voor Computational Thinking als
+denkvaardigheid. Computational Thinking bestaat uit een samenhangend
+geheel van cognitieve denkhandelingen, waaronder abstractie,
+decompositie, algoritmisch denken, generalisatie en evaluatie. Deze
+denkhandelingen richten zich op het formuleren en structureren van
+problemen, het expliciteren van oplossingsstappen en het kritisch
+beoordelen van oplossingen, los van een specifieke vakinhoud of
+context.</p>
+<p>Dergelijke denkhandelingen kunnen niet worden ontwikkeld door ze
+uitsluitend te benoemen of conceptueel te beschrijven. Abstractie vraagt
+ervaring met het bewust weglaten van niet-essentiële informatie;
+decompositie vereist het daadwerkelijk opsplitsen van complexe
+problemen; algoritmisch denken ontstaat door het expliciteren van
+volgorde en afhankelijkheden; generalisatie door het herkennen van
+herbruikbare structuren; en evaluatie door het toetsen van oplossingen
+aan hun doel. Zonder ervaring met deze processen blijft Computational
+Thinking abstract en losgekoppeld van handelen.</p>
+<p>Hier sluit Wings beschrijving van Computational Thinking expliciet op
+aan. Wing benadrukt dat Computational Thinking meer is dan programmeren,
+maar haar definitie impliceert tegelijkertijd dat denken over
+uitvoerbaarheid niet los kan worden gezien van ervaring met uitvoering
+(Wing, 2006). Zonder dergelijke ervaringen blijven abstractie,
+decompositie en algoritmisch denken theoretische constructen in plaats
+van functionele denkstrategieën.</p>
+<p>Whiteheads analyse vindt duidelijke ondersteuning in latere theorieën
+over leren en kennisoverdracht. In How People Learn laten Bransford,
+Brown en Cocking zien dat kennis pas overdraagbaar wordt wanneer zij is
+opgebouwd vanuit begrip van onderliggende structuren, en niet wanneer
+leren blijft steken in het volgen van procedures (Bransford et al.,
+2000). Leerlingen kunnen in dat geval handelingen correct uitvoeren
+zonder te begrijpen waarom deze werken, waardoor kennis gebonden blijft
+aan de context waarin zij is aangeleerd. Wanneer leren zich richt op
+correcte uitvoering binnen één vaste context, weten leerlingen wat zij
+moeten doen, maar niet waarom dat werkt, laat staan wanneer dezelfde
+denkwijze elders relevant is. Transfer blijft dan uit, niet omdat
+leerlingen tekortschieten, maar omdat het leren zelf geen ruimte heeft
+geboden om de onderliggende samenhang te doorgronden.</p>
+<p>Voor Computational Thinking betekent dit dat denken over
+uitvoerbaarheid pas betekenis krijgt wanneer leerlingen hebben ervaren
+dat keuzes in structuur, volgorde en explicitering gevolgen hebben.
+Abstractie, algoritmisch denken en evaluatie krijgen pas inhoud wanneer
+instructies onvolledig blijken, aannames niet kloppen of oplossingen
+onverwachte uitkomsten hebben. Zonder zulke ervaringen blijft
+Computational Thinking aanwezig als begrip, maar inert als
+vaardigheid.</p>
+<p>De implicatie hiervan is fundamenteel: transfer kan niet worden
+verondersteld wanneer leren zich beperkt tot benoemen, herkennen of
+impliciet toepassen binnen vakspecifieke routines. Transfer moet worden
+voorbereid door onderwijs dat ruimte biedt om denkhandelingen actief te
+gebruiken, te testen en opnieuw te structureren. Daarmee wordt zichtbaar
+dat transfer geen eigenschap is van de leerling, maar van het
+onderwijsontwerp.</p>
+<p>Deze spanning vormt een cruciale basis voor het verdere theoretische
+kader. In de volgende paragraaf wordt dit uitgewerkt aan de hand van
+expliciete transfer-theorieën, waarin zichtbaar wordt waarom
+vakoverstijgende toepassing niet vanzelf ontstaat en welke rol
+metacognitie daarbij speelt.</p>
+<h2 class="unnumbered" id="high-road-tranfer-en-metacognitie">High-road
+tranfer en metacognitie</h2>
+<p>Whitehead laat zien wat er misgaat wanneer kennis inert blijft, maar
+niet hoe kennis zich daadwerkelijk losmaakt van de context waarin zij is
+aangeleerd. Die vraag staat centraal in het werk van Salomon en Perkins.
+In hun analyse beschrijven zij transfer niet als een vanzelfsprekend
+vervolg op leren, maar als een rocky road: een hobbelige weg waarop
+slechts bepaalde vormen van leren daadwerkelijk verder reiken dan de
+oorspronkelijke context (Salomon &amp; Perkins, 1989).</p>
+<p>Zij maken daarbij een fundamenteel onderscheid tussen twee vormen van
+transfer. Low-road transfer ontstaat door herhaling en automatisering.
+Wanneer een nieuwe situatie sterk lijkt op wat eerder is geoefend, wordt
+passend gedrag vrijwel automatisch geactiveerd. Deze vorm van transfer
+is efficiënt, maar strikt contextgebonden: zij functioneert alleen
+zolang de overeenkomst tussen situaties groot genoeg is (Salomon &amp;
+Perkins, 1989).</p>
+<p>Voor vaardigheden die bedoeld zijn om binnen één domein te blijven
+functioneren, kan dit voldoende zijn. Voor denkvaardigheden die juist
+vakoverstijgend inzetbaar zouden moeten zijn, schiet low-road transfer
+echter tekort. Computational Thinking vraagt niet om het herhalen van
+bekende stappen, maar om het herkennen van onderliggende structuren die
+zich telkens in andere gedaanten voordoen. Dat vereist een andere vorm
+van overdracht: high-road transfer.</p>
+<p>High-road transfer ontstaat niet automatisch. Zij vraagt bewuste
+mentale inspanning en expliciete reflectie. Leerlingen moeten actief
+afstand nemen van de oorspronkelijke context, abstraheren wat daarin
+essentieel was, en deze abstractie doelgericht inzetten in een nieuwe
+situatie (Salomon &amp; Perkins, 1989). Transfer is hier geen bijproduct
+van oefenen, maar een expliciete denkhandeling.</p>
+<p>Cruciaal in deze benadering is de rol van metacognitie. High-road
+transfer vereist dat leerlingen niet alleen iets doen, maar ook
+begrijpen wat zij doen en waarom. Zij moeten hun eigen denkproces kunnen
+herkennen, benoemen en herformuleren. Zonder die bewustwording blijft
+kennis gebonden aan de context waarin zij is aangeleerd, zelfs wanneer
+dezelfde denkhandeling in andere vakken opnieuw voorkomt.</p>
+<p>Dit punt is direct relevant voor Computational Thinking. De
+kerncomponenten ervan — abstractie, decompositie, algoritmisch denken,
+generalisatie en evaluatie — zijn geen zichtbare handelingen, maar
+interne denkprocessen. Zij worden pas overdraagbaar wanneer leerlingen
+leren herkennen dat zij deze denkstrategieën inzetten, en wanneer deze
+strategieën in een andere context opnieuw relevant zijn. Zonder
+expliciete reflectie blijven deze denkhandelingen onzichtbaar voor de
+leerling zelf.</p>
+<p>Vanuit dit perspectief wordt duidelijk waarom impliciete inbedding
+problematisch is. Wanneer Computational Thinking uitsluitend voorkomt
+binnen vakspecifieke werkwijzen, zonder expliciete taal of
+reflectiemomenten, krijgen leerlingen geen gelegenheid om het denken los
+te maken van het vak. Zij voeren de handeling uit, maar herkennen haar
+niet als overdraagbare strategie.</p>
+<p>Salomon en Perkins benadrukken dat transfer niet ontstaat door
+vaardigheden vaak tegen te komen, maar door ze bewust te reconstrueren
+in nieuwe contexten. Zonder die reconstructie blijft transfer beperkt
+tot situaties die sterk lijken op wat eerder is geoefend.
+Vakoverstijgende toepassing — precies datgene wat van Computational
+Thinking wordt verwacht — kan op die manier niet ontstaan (Salomon &amp;
+Perkins, 1989).</p>
+<p>Wanneer deze theorie wordt gelegd naast de analyse van de kerndoelen
+en examenprogramma’s, ontstaat een scherpe spanning. In de onderbouw
+wordt Computational Thinking expliciet benoemd en aangeleerd; in de
+bovenbouw wordt verondersteld dat deze denkvaardigheid vanzelf
+beschikbaar blijft, terwijl zij uitsluitend impliciet aanwezig is binnen
+vakspecifieke praktijken. Vanuit het perspectief van Salomon en Perkins
+betekent dit dat van leerlingen high-road transfer wordt verwacht,
+terwijl het onderwijsontwerp slechts voorwaarden creëert voor low-road
+transfer.</p>
+<p>De context verandert, maar het moment van bewuste overdracht
+ontbreekt. Leerlingen worden geacht Computational Thinking te herkennen
+en opnieuw in te zetten, zonder dat zij expliciet hebben geleerd wanneer
+dat van hen wordt gevraagd. Niet omdat zij het denken niet beheersen,
+maar omdat zij nooit hebben geleerd het te herkennen als overdraagbare
+denkstrategie.</p>
+<p>Hiermee wordt zichtbaar dat het probleem niet ligt bij motivatie,
+niveau of inzet van leerlingen, maar bij de aannames die het
+onderwijsontwerp maakt. High-road transfer wordt verwacht zonder
+expliciete ondersteuning van metacognitie. Computational Thinking wordt
+geacht vanzelf mee te bewegen naar nieuwe contexten, terwijl precies dat
+volgens Salomon en Perkins niet vanzelf kan ontstaan.</p>
+<p>Deze analyse maakt de stap naar de volgende paragraaf onvermijdelijk.
+Als transfer niet automatisch ontstaat, en zelfs bewuste ondersteuning
+vereist, dan verschuift de kernvraag: niet of leerlingen Computational
+Thinking beheersen, maar of het onderwijs hen voorbereidt om dit denken
+in nieuwe en onbekende situaties opnieuw te ontwikkelen. Dat perspectief
+staat centraal in het concept Preparation for Future Learning.</p>
+<h2 class="unnumbered" id="preperation-for-future-learning">Preperation
+for Future Learning</h2>
+<p>In hun artikel Rethinking Transfer: A Simple Proposal with Multiple
+Implications verleggen Bransford en Schwartz het perspectief op transfer
+op een fundamentele manier. Zij stellen dat transfer te vaak wordt
+opgevat als het correct toepassen van bestaande kennis in een nieuwe
+situatie, terwijl daarmee een cruciaal aspect van leren buiten beeld
+blijft. Zij introduceren daarom het concept Preparation for Future
+Learning (PFL), waarin niet het herhalen van eerder geleerde oplossingen
+centraal staat, maar de mate waarin leerlingen voorbereid zijn om in
+nieuwe situaties verder te leren (Bransford &amp; Schwartz, 1999).</p>
+<p>Bransford en Schwartz contrasteren expliciet twee benaderingen van
+transfer. De traditionele benadering richt zich op het herkennen en
+toepassen van bestaande kennis in een nieuwe context. Hun alternatief
+legt de nadruk op wat zij noemen <em>“the ability to learn during
+transfer”</em> (Bransford &amp; Schwartz, 1999). Transfer wordt daarmee
+geen eindpunt van leren, maar een leerproces op zichzelf. Succesvolle
+transfer betekent niet dat een leerling direct het juiste antwoord
+geeft, maar dat hij of zij in staat is nieuwe informatie te
+interpreteren, bestaande kennis te herstructureren en tot een passend
+begrip te komen.</p>
+<p>Een belangrijk gevolg van deze benadering is dat onderwijs niet
+alleen moet beoordelen wat leerlingen weten, maar vooral hoe zij omgaan
+met onbekende situaties. Bransford en Schwartz benadrukken dat
+<em>“transfer measures are especially important for evaluating
+educational success”</em>, juist omdat zij zichtbaar maken of leerlingen
+voorbereid zijn om kennis flexibel in te zetten en verder te ontwikkelen
+(Bransford &amp; Schwartz, 1999). Kennis die uitsluitend werkt in
+bekende situaties kan op korte termijn effectief lijken, maar faalt
+zodra de context verandert.</p>
+<p>In dit licht waarschuwen Bransford en Schwartz expliciet voor leren
+dat te sterk is vastgehecht aan één specifieke context. Zij stellen dat
+kennis die “too tied to its original context” is, moeilijk overdraagbaar
+wordt (Bransford &amp; Schwartz, 1999). Tegelijkertijd laten zij zien
+dat leren in meerdere contexten, met aandacht voor onderliggende
+structuren en abstracties, juist kan bijdragen aan transfer. Niet de
+afwezigheid van context is problematisch, maar het ontbreken van
+variatie en herstructurering.</p>
+<p>Deze analyse is direct relevant voor Computational Thinking.
+Computational Thinking bestaat uit denkhandelingen zoals abstractie,
+decompositie, algoritmisch denken, generalisatie en evaluatie. Deze
+denkhandelingen zijn bij uitstek bedoeld om nieuwe en onbekende
+problemen te structureren. Vanuit het perspectief van Preparation for
+Future Learning betekent dit dat Computational Thinking niet moet worden
+opgevat als een afgeronde vaardigheid die na de onderbouw ‘beschikbaar’
+is, maar als een denkraamwerk dat leerlingen in staat stelt om in nieuwe
+situaties opnieuw betekenis te construeren.</p>
+<p>Wanneer Computational Thinking in de bovenbouw uitsluitend impliciet
+voorkomt binnen vakspecifieke werkwijzen, wordt deze voorbereiding op
+toekomstig leren niet expliciet ondersteund. Leerlingen voeren
+handelingen uit die verwant zijn aan Computational Thinking, maar worden
+niet uitgedaagd om hun denken te herstructureren of te verdiepen wanneer
+de context verandert. Daarmee verschuift de focus van leren naar
+uitvoeren, terwijl juist het vermogen om opnieuw te leren centraal zou
+moeten staan.</p>
+<p>Bransford en Schwartz maken duidelijk dat goed onderwijs niet primair
+moet ontwerpen voor directe transfer, maar voor leerbaarheid op lange
+termijn. Zij stellen dat onderwijs succesvol is wanneer het leerlingen
+voorbereidt om nieuwe kennis te integreren, nieuwe problemen te
+analyseren en nieuwe denkstrategieën te ontwikkelen wanneer eerdere
+kennis tekortschiet (Bransford &amp; Schwartz, 1999). Vanuit dit
+perspectief wordt zichtbaar dat het ontbreken van expliciete aandacht
+voor Computational Thinking in de bovenbouw niet slechts een ontbrekend
+onderdeel is, maar een gemiste kans om leerlingen voor te bereiden op
+toekomstige leer- en denkuitdagingen.</p>
+<p>Deze benadering vormt daarmee de afsluitende theoretische schakel in
+dit hoofdstuk. Waar Whitehead laat zien wat er gebeurt wanneer kennis
+inert blijft, en Salomon en Perkins verklaren waarom vakoverstijgende
+transfer niet vanzelf ontstaat, laten Bransford en Schwartz zien wat
+onderwijs wél moet doen: niet aannemen dat denkvaardigheden beschikbaar
+blijven, maar ontwerpen voor situaties waarin leerlingen worden
+uitgedaagd om deze opnieuw te activeren, te herstructureren en verder te
+ontwikkelen.</p>
+<p>Daarmee ontstaat de vraag hoe een leeromgeving kan worden ontworpen
+waarin leerlingen Computational Thinking daadwerkelijk moeten inzetten
+binnen een nieuwe context. Vanuit deze ontwerpvraag is het
+praktijkonderzoek in dit artikel ontstaan. Het volgende hoofdstuk
+beschrijft daarom de ontwikkeling van de digitale leeromgeving die is
+ontworpen om deze vakoverstijgende toepasbaarheid van Computational
+Thinking te verkennen.</p>
+<h1
+id="didactisch-ontwerp-een-digitale-leeromgeving-voor-vakoverstijgend-computational-thinking">Didactisch
+ontwerp: een digitale leeromgeving voor vakoverstijgend Computational
+Thinking</h1>
+<h2 class="unnumbered" id="ontwerpprincipes">Ontwerpprincipes</h2>
+<p>De theoretische analyse in hoofdstuk 2 laat zien dat vakoverstijgende
+transfer van Computational Thinking niet vanzelf ontstaat. (Whitehead,
+1929) waarschuwt voor kennis die wel aanwezig is, maar niet functioneert
+buiten de context waarin zij is geleerd. (Salomon &amp; Perkins, 1989)
+benadrukken dat transfer afhankelijk is van het bewust herkennen en
+opnieuw inzetten van denkstrategieën. (Bransford &amp; Schwartz, 1999)
+voegen hieraan toe dat onderwijs leerlingen moet voorbereiden op
+toekomstig leren in nieuwe situaties. Vanuit deze inzichten ontstond de
+ontwerpvraag hoe een leeromgeving kan worden ontwikkeld waarin
+leerlingen Computational Thinking niet alleen bezitten, maar
+daadwerkelijk moeten inzetten binnen een nieuwe context.</p>
+<p>Deze ontwerpvraag maakte het onwenselijk om Computational Thinking
+als afzonderlijk leerdoel of als expliciete instructie aan te bieden.
+Wanneer leerlingen uitsluitend leren welke denkstrategieën bij
+Computational Thinking horen, bestaat het risico dat deze kennis inert
+blijft en niet beschikbaar is op het moment dat zij nodig is. Daarom
+moest de leeromgeving zo worden ingericht dat leerlingen niet konden
+handelen zonder eerst informatie te verzamelen, te structureren en te
+analyseren. Computational Thinking werd daarmee geen onderwerp van
+uitleg, maar een noodzakelijke voorwaarde om binnen de leeromgeving tot
+betekenisvolle keuzes te komen.</p>
+<p>Tegelijkertijd laat de literatuur zien dat het toepassen van
+denkstrategieën alleen niet voldoende is voor vakoverstijgende transfer.
+(Salomon &amp; Perkins, 1989) beschrijven dat transfer samenhangt met
+het bewust herkennen en reguleren van eigen denkprocessen. Vanuit dit
+perspectief moest de leeromgeving leerlingen niet alleen laten handelen,
+maar hen ook confronteren met de keuzes, aannames en redeneringen die
+aan dit handelen voorafgaan. Het expliciteren van denken werd daarom een
+integraal onderdeel van het ontwerp. Niet het juiste antwoord stond
+centraal, maar het zichtbaar maken van het denkproces dat tot een
+antwoord leidt.</p>
+<p>Daarnaast moest de leeromgeving voorkomen dat leerlingen terug konden
+vallen op bekende routines of eerder aangeleerde procedures. (Bransford
+&amp; Schwartz, 1999) stellen dat transfer niet primair zichtbaar wordt
+wanneer bestaande kennis wordt herhaald, maar wanneer leerlingen deze
+kennis gebruiken om in nieuwe situaties opnieuw betekenis te
+construeren. Om die reden moest de leeromgeving een context bieden die
+voldoende nieuw was om herhaling van bekende werkwijzen te voorkomen,
+maar tegelijkertijd betekenisvol genoeg bleef om analyse, interpretatie
+en besluitvorming uit te lokken. Het doel was niet om eerder geleerd
+gedrag te reproduceren, maar om leerlingen uit te dagen hun
+denkstrategieën opnieuw te activeren, te combineren en verder te
+ontwikkelen.</p>
+<p>Vanuit deze uitgangspunten is een digitale leeromgeving (Appendix V)
+ontwikkeld waarin leerlingen financiële data analyseren en gebruiken als
+basis voor besluitvorming. De concrete uitwerking van deze leeromgeving
+wordt beschreven in de volgende paragraaf.</p>
+<h2 class="unnumbered"
+id="computational-thinking-als-vakoverstijgend-handelen">Computational
+Thinking als vakoverstijgend handelen</h2>
+<p>Binnen de leeromgeving functioneert Computational Thinking niet als
+ondersteunende vaardigheid, maar als noodzakelijke voorwaarde om
+überhaupt te kunnen handelen. De leeromgeving is niet ontworpen om
+Computational Thinking of programmeervaardigheden expliciet aan te
+leren. Programmeren fungeert als hulpmiddel binnen de taak en
+Computational Thinking wordt nergens als afzonderlijk leerdoel
+aangeboden. Juist daardoor wordt zichtbaar in hoeverre leerlingen deze
+denkstrategieën daadwerkelijk inzetten wanneer een nieuwe context daarom
+vraagt.</p>
+<p>Leerlingen starten niet met een overzichtelijke dataset of een vooraf
+gedefinieerde vraag, maar met ruwe, ongestructureerde financiële data
+die via Python en een externe API wordt binnengehaald. Deze data heeft
+op zichzelf geen betekenis, geen richting en geen besliswaarde. Zolang
+de leerling deze data niet structureert, reduceert en interpreteert, is
+handelen onmogelijk.</p>
+<p>Om van deze ruwe data tot bruikbare informatie te komen, moeten
+leerlingen verschillende denkhandelingen uitvoeren die kenmerkend zijn
+voor Computational Thinking. Zij abstraheren door irrelevante informatie
+weg te laten en te bepalen welke variabelen relevant zijn. Zij
+decomponeren het probleem door datasets op te splitsen in hanteerbare
+onderdelen, zoals tijdsperioden, koersontwikkelingen of handelsvolumes.
+Zij formuleren algoritmische stappen om berekeningen reproduceerbaar te
+maken en gebruiken deze om patronen, trends en afwijkingen zichtbaar te
+maken. Door verschillende aandelen, tijdsperioden en analyses met elkaar
+te vergelijken, zoeken zij naar patronen die ook buiten één specifieke
+dataset bruikbaar zijn. Vervolgens evalueren zij hun aanpak door te
+beoordelen of de gekozen analyses daadwerkelijk leiden tot inzicht dat
+bruikbaar is voor verdere besluitvorming.</p>
+<p>Deze denkhandelingen zijn geen theoretische exercitie, maar worden
+afgedwongen door het ontwerp van de leeromgeving. Zonder expliciete
+keuzes in abstractie, decompositie, algoritmiek en evaluatie blijft de
+beschikbare data een ondoorzichtige verzameling getallen en kan geen
+betekenisvolle vervolgstap worden gezet. Computational Thinking vormt
+daarmee geen extra laag bovenop de opdracht, maar de enige manier waarop
+de opdracht überhaupt kan functioneren.</p>
+<p>Op deze manier wordt Computational Thinking niet gekoppeld aan één
+vak of één specifieke context. Het fungeert als een overdraagbaar
+denkkader dat leerlingen ondersteunt bij het omzetten van
+ongestructureerde informatie in betekenisvolle inzichten. Juist doordat
+Computational Thinking niet expliciet als leerdoel wordt benoemd, maar
+noodzakelijk wordt gemaakt binnen een nieuwe context, ontstaat een
+situatie waarin leerlingen deze denkstrategieën moeten gebruiken in
+plaats van er alleen over te leren.</p>
+<h2 class="unnumbered"
+id="feedback-zelfsturing-en-verantwoordelijkheid">Feedback, zelfsturing
+en verantwoordelijkheid</h2>
+<p>Omdat Computational Thinking alleen zichtbaar wordt wanneer
+leerlingen zelf betekenis geven aan informatie en beslissingen, blijft
+verantwoordelijkheid voor handelen binnen de leeromgeving expliciet bij
+de leerling liggen. Het systeem neemt geen beslissingen over, schrijft
+geen vaste oplossingsroute voor en biedt geen optimale strategie aan.
+Leerlingen bepalen zelf welke gegevens zij verzamelen, welke analyses
+zij uitvoeren en welke conclusies zij daaruit trekken. Daarmee wordt
+voorkomen dat Computational Thinking wordt uitgevoerd vóór de leerling.
+Het denken blijft noodzakelijk eigendom van de leerling zelf. Deze
+ontwerpkeuze vraagt om een andere vorm van feedback dan gebruikelijk is
+binnen veel digitale leeromgevingen. Feedback richt zich niet primair op
+het corrigeren van fouten of het beoordelen van uitkomsten, maar op het
+expliciteren van denkstappen die aan handelen voorafgaan. Tooltips en
+meldingen verschijnen niet wanneer een leerling een verkeerde keuze
+maakt, maar wanneer essentiële aannames, analyses of expliciteringen
+ontbreken. De feedback richt zich daarmee niet op het resultaat, maar op
+het denkproces dat nodig is om tot dat resultaat te komen.</p>
+<p>Bevestigingsvensters bij aankoop- en verkoopbeslissingen vervullen
+hierin een vergelijkbare functie. Zij onderbreken het handelen niet om
+het te verhinderen, maar om het moment van besluitvorming zichtbaar te
+maken. Leerlingen worden geconfronteerd met de vraag of hun handeling
+voortkomt uit analyse en planvorming of uit impulsief handelen. Niet de
+keuze zelf staat centraal, maar de redenering waarop deze keuze is
+gebaseerd.</p>
+<p>Deze verantwoordelijkheid wordt verder geconcretiseerd in het
+persoonlijk handelingsplan dat leerlingen voor ieder aandeel vastleggen.
+In dit plan formuleren zij expliciet hun eigen aannames en
+verwachtingen, bijvoorbeeld in de vorm van een buy below- en sell
+above-waarde. Deze grenswaarden worden niet door het systeem
+voorgesteld, maar volgen uit de analyses die leerlingen zelf hebben
+uitgevoerd. Het handelingsplan vormt daarmee een expliciete verbinding
+tussen analyse, verwachting en handelen.</p>
+<p>Wanneer leerlingen vervolgens afwijken van hun eigen plan, maakt het
+systeem deze discrepantie zichtbaar. Niet om het handelen af te keuren,
+maar om de relatie tussen analyse, intentie en actie expliciet te maken.
+Leerlingen worden uitgenodigd om te onderzoeken waarom zij afwijken van
+hun oorspronkelijke redenering. Is de situatie veranderd, waardoor een
+eerdere analyse moet worden herzien? Of wordt een eerder geformuleerde
+redenering losgelaten zonder nieuwe onderbouwing? In beide gevallen
+wordt het denkproces opnieuw geactiveerd.</p>
+<p>Op deze manier ondersteunt de leeromgeving geen gedrag, maar
+zelfsturing. Leerlingen worden voortdurend geconfronteerd met de
+kwaliteit van hun eigen redeneringen, aannames en beslissingen.
+Computational Thinking wordt daarmee niet geoefend als een reeks
+technieken, maar als een bewuste en herhaalbare manier van denken die
+leerlingen leren herkennen, expliciteren en opnieuw inzetten wanneer de
+situatie daarom vraagt.</p>
+<p>De ontwikkeling van deze leeromgeving bracht echter ook een nieuw
+spanningsveld aan het licht. Hoewel programmeren binnen de leeromgeving
+geen leerdoel is, vormt het wel het hulpmiddel waarmee leerlingen data
+ophalen, analyseren en visualiseren. Tijdens het ontwerpen werd
+duidelijk dat een aanzienlijk deel van de cognitieve belasting niet werd
+veroorzaakt door de vakinhoudelijke opdracht, maar door
+programmeertechnische handelingen die noodzakelijk waren om met de
+beschikbare data te kunnen werken.</p>
+<p>Hierdoor ontstond de vraag hoe programmeren zodanig kan worden
+ingezet als vakdidactisch hulpmiddel dat de programmeertechnische
+complexiteit het primaire vakinhoudelijke leerdoel niet overschaduwt.
+Deze ontwerpvraag vormt de aanleiding voor het praktijkonderzoek in het
+volgende hoofdstuk.</p>
+<h1
+id="praktijkonderzoek-programmeren-als-vakdidactisch-hulpmiddel">Praktijkonderzoek:
+Programmeren als vakdidactisch hulpmiddel</h1>
+<h2 class="unnumbered" id="onderzoeksvraag">Onderzoeksvraag</h2>
+<p><em>“In hoeverre ondersteunt een Python-module die een deel van de
+programmeertechnische complexiteit abstraheert leerlingen bij het
+zelfstandig uitvoeren van een vakinhoudelijke opdracht waarin
+programmeren als hulpmiddel wordt ingezet?”</em></p>
+<h2 class="unnumbered" id="onderzoekscontext">Onderzoekscontext</h2>
+<p>Het praktijkonderzoek vormt een deelonderzoek binnen de bredere
+onderzoeksvraag naar de invloed van expliciete aandacht voor transfer op
+de vakoverstijgende toepasbaarheid van Computational Thinking in de
+bovenbouw. Daarbij wordt één ontwerpvoorwaarde onderzocht die
+noodzakelijk lijkt om programmeren als vakdidactisch hulpmiddel te
+kunnen inzetten binnen een vakinhoudelijke context.</p>
+<p>Binnen de in hoofdstuk 3 beschreven leeromgeving is ervoor gekozen om
+financiële data te analyseren met behulp van Python. Programmeren
+fungeert daarbij niet als leerdoel, maar als hulpmiddel waarmee
+leerlingen data kunnen ophalen, structureren, analyseren en
+visualiseren.</p>
+<p>Tijdens de ontwikkeling van deze leeromgeving bleek echter dat een
+aanzienlijk deel van de programmeeractiviteiten bestond uit handelingen
+die noodzakelijk waren om data beschikbaar te maken, maar slechts
+beperkt bijdroegen aan het vakinhoudelijke vraagstuk zelf. Het ophalen
+van gegevens via een API, het verwerken van JSON-data en het werken met
+standaard Python-bibliotheken vroegen om programmeerkennis die niet
+direct bijdroeg aan de analyse van de gegevens.</p>
+<p>Daarom is een Python-module ontwikkeld die een deel van de
+programmeertechnische complexiteit abstraheert. Dit gebeurt door
+veelvoorkomende programmeertechnische handelingen onder te brengen in
+een beperkt aantal functies voor het ophalen, opslaan, laden en
+analyseren van data. Het doel hiervan was niet om de programmeeropdracht
+eenvoudiger te maken, maar om programmeertechnische details die niet
+direct bijdragen aan het vakinhoudelijke leerdoel te abstraheren.
+Hierdoor ontstond meer ruimte voor de vakinhoudelijke en cognitieve
+activiteiten waarvoor programmeren als hulpmiddel wordt ingezet.</p>
+<p>Vanuit deze ontwerpkeuze ontstond de volgende ontwerpvraag: Hoe kan
+programmeren zodanig worden ingezet als hulpmiddel binnen een
+vakinhoudelijke opdracht dat de cognitieve belasting van het
+programmeren het primaire leerdoel niet overschaduwt?</p>
+<p>Deze vraag is relevant voor de vakoverstijgende inzet van
+Computational Thinking. Wanneer een vakdocent leerlingen wil laten
+werken met denkprocessen zoals abstractie, decompositie, evaluatie en
+generalisatie, moet de aandacht van leerlingen in de eerste plaats
+kunnen uitgaan naar het vakinhoudelijke probleem. Wanneer programmeren
+te veel cognitieve belasting veroorzaakt, kan de aandacht verschuiven
+van het analyseren van een probleem naar het uitvoeren van technische
+handelingen.</p>
+<p>De beantwoording van deze vraag raakt niet alleen aan het ontwerp van
+een afzonderlijke vakopdracht, maar ook aan de inrichting van Digitale
+Geletterdheid als leergebied. Wanneer leerlingen in de onderbouw leren
+programmeren als onderdeel van Computational Thinking, is het relevant
+om na te denken over de wijze waarop deze programmeervaardigheden later
+binnen andere vakcontexten kunnen worden ingezet. Programmeeronderwijs
+dat volledig gericht is op technische uitvoering biedt een vakdocent in
+de bovenbouw mogelijk weinig aanknopingspunten om Computational Thinking
+opnieuw betekenisvol te activeren. Wanneer programmeren daarentegen
+wordt aangeboden als hulpmiddel binnen een breder denkproces, ontstaat
+ruimte om dezelfde denkstrategieën later opnieuw toe te passen binnen
+andere vakgebieden.</p>
+<p>Het praktijkonderzoek richt zich op deze ontwerpkeuze. Centraal staat
+de vraag in hoeverre een Python-module die een deel van de
+programmeertechnische complexiteit abstraheert leerlingen ondersteunt
+bij het zelfstandig uitvoeren van een vakinhoudelijke opdracht waarin
+programmeren als hulpmiddel wordt ingezet.</p>
+<h2 class="unnumbered" id="onderzoeksopzet">Onderzoeksopzet</h2>
+<p>Aan het praktijkonderzoek namen acht leerlingen deel uit een 4
+vwo-informaticaklas. De klas bestond uit achttien leerlingen, waarvan
+zestien tijdens de uitvoering van het onderzoek aanwezig waren. Het
+onderzoek vond plaats tijdens een reguliere informaticales. De
+deelnemende leerlingen hadden hun reguliere lesopdrachten afgerond en
+konden daardoor deelnemen aan het praktijkonderzoek.</p>
+<p>De beoogde doelgroep van het onderwijsontwerp bestaat uit
+bovenbouwleerlingen die in de onderbouw meerdere jaren onderwijs hebben
+gevolgd waarin Digitale Geletterdheid, programmeren en Computational
+Thinking samenhangend zijn aangeboden. Omdat deze doelgroep op dit
+moment nog niet bestaat, is gekozen voor bovenbouwleerlingen die het vak
+Informatica volgen en ervaring hebben opgedaan binnen het
+programmeeronderwijs van dat vak. Hiermee kon worden onderzocht in
+hoeverre de ontwikkelde Python-module als vakdidactisch hulpmiddel
+binnen een bestaande onderwijscontext uitvoerbaar was.</p>
+<p>De leerlingen voerden individueel een Jupyter Notebook-opdracht uit
+waarin zij met behulp van de ontwikkelde Python-module historische
+koersgegevens van het aandeel META ophaalden, verwerkten en
+onderzochten.</p>
+<p>De opdracht bestond uit een reeks opeenvolgende stappen, waaronder
+het instellen van een API-key, het ophalen van actuele en historische
+koersgegevens, het opslaan en laden van JSON-data, het omzetten van deze
+data naar een Pandas DataFrame en het uitvoeren van eenvoudige
+data-analyses en visualisaties.</p>
+<p>De opdracht was niet ontworpen om economische kennis of
+onderzoeksvaardigheden van leerlingen te beoordelen. Analyseactiviteiten
+maakten echter wel onderdeel uit van de programmeeropdracht, omdat
+leerlingen de opgehaalde data moesten onderzoeken en interpreteren om de
+verschillende stappen van de opdracht te kunnen begrijpen en uitvoeren.
+De gekozen financiële context diende daarmee primair als vakinhoudelijke
+omgeving waarbinnen het gebruik van de ontwikkelde Python-module kon
+worden onderzocht.</p>
+<p>De uitvoering vond plaats in twee opeenvolgende observatierondes van
+vier leerlingen. De leerlingen werkten individueel achter vier naast
+elkaar geplaatste computers. Tijdens de uitvoering werden de leerlingen
+doorlopend geobserveerd en werden de observaties direct vastgelegd met
+behulp van een observatieformulier. Per stap werd geregistreerd of de
+leerling de taak succesvol kon uitvoeren, welke mate van ondersteuning
+nodig was en welke opvallende observaties werden gedaan. Wanneer
+leerlingen vastliepen, werd waar nodig beperkte ondersteuning gegeven
+zodat de opdracht kon worden vervolgd.</p>
+<p>Het doel van het praktijkonderzoek was vast te stellen in hoeverre
+leerlingen zelfstandig gebruik konden maken van de ontwikkelde
+Python-module. Daarmee richtte het onderzoek zich op de uitvoerbaarheid
+van deze ontwerpkeuze binnen een vakinhoudelijke context en niet op de
+kwaliteit van de uitgevoerde analyses of de vakinhoudelijke conclusies
+van leerlingen.</p>
+<h2 class="unnumbered" id="onderzoeksmateriaal">Onderzoeksmateriaal</h2>
+<p>Voor het praktijkonderzoek werd gebruikgemaakt van een Jupyter
+Notebook waarin de volledige opdracht stapsgewijs was uitgewerkt. De
+notebook was geplaatst in een GitHub-repository en werd via een
+Binder-link beschikbaar gesteld aan de leerlingen. Hierdoor konden
+leerlingen zonder lokale installatie direct in een browseromgeving
+werken.</p>
+<p>De opdracht bestond uit een reeks programmeer- en
+analyseactiviteiten, waaronder het ophalen van actuele en historische
+beursgegevens, het bekijken en opslaan van JSON-data, het laden van
+opgeslagen data, het omzetten van JSON-data naar een Pandas DataFrame en
+het uitvoeren van eenvoudige data-analyses en visualisaties.</p>
+<p>De financiële gegevens werden opgehaald via de Twelve Data API. Deze
+online databron biedt toegang tot actuele en historische beursgegevens
+via een gestandaardiseerde programmeerinterface (API). Voor toegang tot
+deze databron was een persoonlijke API-key vereist.</p>
+<p>Vlak voor aanvang van het onderzoek ontvingen de leerlingen via een
+bericht in Teams de Binder-link naar de notebookomgeving en de benodigde
+API-key. Hierdoor konden alle leerlingen onder gelijke omstandigheden
+aan de opdracht beginnen.</p>
+<p>Naast de notebook ontvingen de leerlingen een geprinte versie van de
+ontwikkelde documentatie. Deze documentatie bevatte een overzicht van de
+beschikbare functies uit de modules <strong>onct.data</strong> en
+<strong>onct.economie</strong>, aangevuld met een beperkt aantal
+veelgebruikte Pandas functies. Per functie werd beschreven welke
+parameters konden worden gebruikt, welk datatype werd verwacht en welke
+uitvoer de functie retourneerde. De documentatie bevatte bewust geen
+volledige uitwerkingen van de opdrachten.</p>
+<p>Om ondersteuning tijdens het onderzoek te standaardiseren, waren voor
+iedere notebookstap afzonderlijke voorbeelduitwerkingen voorbereid. Deze
+uitwerkingen bevatten de correcte code voor de betreffende stap en waren
+vooraf geprint beschikbaar. Wanneer een leerling vastliep, kon een
+dergelijke uitwerking als interventie worden verstrekt. Voor alle
+stappen van de opdracht was een voorbeelduitwerking beschikbaar,
+ongeacht of vooraf werd verwacht dat leerlingen bij die stap problemen
+zouden ervaren. Hierdoor werd voorkomen dat tijdens het onderzoek ad-hoc
+oplossingen moesten worden bedacht en bleef de aangeboden ondersteuning
+voor alle leerlingen vergelijkbaar.</p>
+<h2 class="unnumbered"
+id="observatie-instrument">Observatie-instrument</h2>
+<p>Voor het verzamelen van de onderzoeksgegevens werd gebruikgemaakt van
+een observatieformulier (Appendix I). Iedere leerling werd gedurende de
+volledige opdracht individueel geobserveerd. Per notebookstap werd
+geregistreerd of de leerling de taak succesvol kon uitvoeren en welke
+mate van ondersteuning daarbij nodig was. Hierbij werd onderscheid
+gemaakt tussen zelfstandig uitvoeren, een kleine hint, een oplossing op
+papier of direct ingrijpen door de docent.</p>
+<p>Naast deze registraties was ruimte aanwezig voor het noteren van
+opvallende observaties. Hierbij werd onder andere gelet op momenten
+waarop leerlingen vastliepen, moeite hadden met het interpreteren van
+gegevens of aanvullende ondersteuning nodig hadden tijdens het uitvoeren
+van de opdracht.</p>
+<p>Na afloop van het praktijkonderzoek zijn de observatiegegevens van
+alle acht leerlingen samengevoegd in één overzichtstabel (Appendix II).
+Per notebookstap is vervolgens gekeken hoe de registraties waren
+verdeeld over de verschillende vormen van ondersteuning. Daarnaast zijn
+de kwalitatieve observaties per stap met elkaar vergeleken om
+terugkerende patronen tijdens de uitvoering van de opdracht te
+identificeren. Op basis van deze gecombineerde analyse is vastgesteld
+bij welke onderdelen leerlingen zelfstandig konden werken en bij welke
+onderdelen structureel ondersteuning nodig was.</p>
+<h2 class="unnumbered" id="resultaten">Resultaten</h2>
+<p>Aan het praktijkonderzoek namen acht leerlingen deel. Alle acht
+leerlingen hebben de volledige notebook-opdracht succesvol afgerond.</p>
+<p>Uit de analyse van de samengevoegde observatiegegevens blijkt dat de
+meeste onderdelen van de opdracht zelfstandig of met beperkte
+ondersteuning konden worden uitgevoerd. Het instellen van de API-key,
+het ophalen van actuele en historische koersgegevens, het opslaan en
+laden van JSON-bestanden en de daaropvolgende notebookstappen werden
+door het merendeel van de leerlingen zelfstandig uitgevoerd. Wanneer
+ondersteuning nodig was, beperkte deze zich meestal tot een kleine
+hint.</p>
+<p>Het meest opvallende vastloopmoment deed zich voor bij het omzetten
+van JSON-data naar een Pandas DataFrame. Alle acht leerlingen hadden bij
+deze stap ondersteuning nodig in de vorm van een vooraf voorbereide
+voorbeeldoplossing. Zonder deze ondersteuning bleek het voor de
+leerlingen lastig om de structuur van de JSON-data te vertalen naar een
+bruikbare DataFrame.</p>
+<p>Na deze ondersteuning konden alle leerlingen de resterende
+notebookstappen uitvoeren. Het bekijken van de eerste rijen van het
+DataFrame, het onderzoeken van kolommen, het berekenen van gemiddelde-,
+minimum- en maximumwaarden en het genereren van een grafiek werden door
+vrijwel alle leerlingen zelfstandig uitgevoerd.</p>
+<p>Een tweede opvallende observatie betreft de stap waarin de inhoud van
+de opgehaalde JSON-data werd weergegeven. Slechts twee leerlingen namen
+de tijd om de getoonde gegevens actief te bekijken voordat zij verder
+gingen met de opdracht. De overige leerlingen gingen vrijwel direct door
+naar de volgende stap.</p>
+<p>Deze stap was bedoeld om inzicht te krijgen in de structuur van de
+opgehaalde gegevens voordat deze werden omgezet naar een DataFrame.
+Tijdens de observaties ontstond de indruk dat de weergegeven
+terminaloutput voor veel leerlingen vooral fungeerde als bevestiging dat
+de code succesvol was uitgevoerd, en minder als informatiebron die nader
+onderzocht moest worden.</p>
+<p>Tijdens de observaties viel daarnaast op dat leerlingen sterk gericht
+waren op het uitvoeren van de opdracht. Analysevragen werden regelmatig
+vluchtig gelezen of overgeslagen en de aandacht lag voornamelijk op het
+vinden van een werkende oplossing. Relatief weinig aandacht werd besteed
+aan de betekenis van de gebruikte data of aan de reden waarom bepaalde
+programmeerstappen werden uitgevoerd.</p>
+<h1
+id="betekenis-van-de-resultaten-voor-computational-thinking-en-transfer">Betekenis
+van de resultaten voor Computational Thinking en transfer</h1>
+<h2 class="unnumbered"
+id="programmeren-is-niet-hetzelfde-als-computational-thinking">Programmeren
+is niet hetzelfde als Computational Thinking</h2>
+<p>De centrale observatie van dit praktijkonderzoek is niet dat
+leerlingen moeite hadden met programmeren, maar dat het succesvol
+uitvoeren van programmeeractiviteiten niet automatisch leidt tot
+zichtbaar Computational Thinking. Daarmee verschuift de vraag van de
+programmeervaardigheid van leerlingen naar de voorwaarden waaronder
+computationele denkstrategieën daadwerkelijk herkenbaar, bespreekbaar en
+overdraagbaar worden. Juist die vraag staat centraal wanneer
+Computational Thinking wordt opgevat als een vakoverstijgend
+denkkader.<br />
+Een centraal uitgangspunt binnen de literatuur over Computational
+Thinking is dat programmeren en Computational Thinking niet hetzelfde
+zijn. (Wing, 2006) benadrukt expliciet dat Computational Thinking meer
+omvat dan het schrijven of uitvoeren van code. Het gaat om de
+denkprocessen die voorafgaan aan een oplossing: het analyseren van
+problemen, het structureren van informatie, het herkennen van patronen
+en het ontwikkelen van strategieën waarmee een probleem oplosbaar wordt.
+Programmeren kan een context bieden waarin deze denkprocessen zichtbaar
+worden, maar vormt niet automatisch bewijs dat zij daadwerkelijk
+plaatsvinden.</p>
+<p>De resultaten van het praktijkonderzoek sluiten aan bij dit
+onderscheid. De meeste leerlingen konden de programmeeropdracht
+zelfstandig of met beperkte ondersteuning uitvoeren. Daarmee bleek de
+gekozen ontwerpkeuze binnen de onderzochte onderwijscontext
+uitvoerbaar.</p>
+<p>Tegelijkertijd lieten de observaties zien dat de aandacht van
+leerlingen vooral gericht was op het uitvoeren van procedures en het
+bereiken van een werkende oplossing. Analysevragen werden regelmatig
+vluchtig gelezen of overgeslagen, documentatie werd voornamelijk
+gebruikt om benodigde code te vinden en de betekenis van de gebruikte
+data kreeg relatief weinig aandacht. Ook de JSON-uitvoer werd door veel
+leerlingen vooral gezien als bevestiging dat de code werkte en minder
+als een gegevensstructuur die onderzocht en geïnterpreteerd kon
+worden.</p>
+<p>Juist hierin wordt het onderscheid tussen programmeren en
+Computational Thinking zichtbaar. Hoewel leerlingen de
+programmeeropdracht succesvol uitvoerden, bleek het uitvoeren van
+programmeeractiviteiten geen garantie voor het expliciet inzetten van
+denkprocessen zoals abstractie, decompositie, generalisatie en
+evaluatie. De leerlingen programmeerden, maar dat betekende niet
+automatisch dat de onderliggende computationele denkstrategieën ook
+zichtbaar werden in hun handelen.</p>
+<p>De centrale observatie van dit praktijkonderzoek is daarom niet dat
+leerlingen moeite hadden met programmeren, maar dat het succesvol
+uitvoeren van programmeeractiviteiten op zichzelf niet automatisch leidt
+tot zichtbaar Computational Thinking. Daarmee verschuift de aandacht van
+de programmeervaardigheid van leerlingen naar de voorwaarden waaronder
+computationele denkstrategieën daadwerkelijk herkenbaar, bespreekbaar en
+overdraagbaar worden. Juist die vraag staat centraal wanneer
+Computational Thinking wordt opgevat als een vakoverstijgend
+denkkader.</p>
+<h2 class="unnumbered"
+id="wat-betekenen-deze-resultaten-voor-transfer">Wat betekenen deze
+resultaten voor transfer?</h2>
+<p>De resultaten van het praktijkonderzoek zijn in overeenstemming met
+de theoretische analyse uit hoofdstuk 2. Hoewel leerlingen de
+programmeeropdracht grotendeels succesvol konden uitvoeren, werden de
+onderliggende denkprocessen van Computational Thinking slechts beperkt
+zichtbaar. Vanuit de transfertheorie is dit geen onverwachte
+uitkomst.</p>
+<p>De observaties sluiten aan bij (Whitehead, 1929), die beschrijft dat
+kennis niet automatisch beschikbaar komt als denkgereedschap wanneer zij
+niet expliciet wordt gebruikt, herkend of opnieuw toegepast in een
+nieuwe context. In het praktijkonderzoek voerden leerlingen
+programmeeractiviteiten uit, maar dit leidde niet vanzelf tot zichtbaar
+gebruik van computationele denkprocessen. Daarmee ondersteunen de
+resultaten niet de veronderstelling dat Computational Thinking
+automatisch zichtbaar wordt wanneer leerlingen leren programmeren.</p>
+<p>Ook de theorie van (Salomon &amp; Perkins, 1989) biedt hiervoor een
+verklaring. Zij stellen dat transfer niet vanzelf ontstaat, maar vraagt
+om expliciete aandacht voor het herkennen en reguleren van
+denkstrategieën. Tijdens de observaties werden dergelijke denkprocessen
+slechts beperkt zichtbaar. De resultaten sluiten daarmee aan bij de
+verwachting dat transfer van Computational Thinking niet als
+vanzelfsprekend uit programmeeractiviteiten voortkomt.</p>
+<p>Vanuit het perspectief van Preparation for Future Learning (Bransford
+&amp; Schwartz, 1999) krijgen de resultaten eveneens betekenis. De
+financiële context van de leeromgeving vormde voor de meeste leerlingen
+een nieuwe situatie waarin eerder opgedane programmeerervaring moest
+worden gecombineerd met analyse, interpretatie en besluitvorming. De
+resultaten laten zien dat deze overgang niet vanzelfsprekend leidt tot
+zichtbaar gebruik van computationele denkprocessen.</p>
+<p>De betekenis van deze resultaten ligt daarom niet in het weerleggen
+van bestaande transfertheorieën, maar juist in het illustreren ervan.
+Binnen de onderzochte onderwijscontext werd niet zichtbaar dat
+Computational Thinking zich automatisch manifesteert wanneer leerlingen
+programmeeractiviteiten uitvoeren. De resultaten ondersteunen daarmee de
+gedachte dat transfer van Computational Thinking niet vanzelf ontstaat,
+maar expliciete aandacht vraagt binnen het onderwijsontwerp.</p>
+<h2 class="unnumbered"
+id="wat-betekenen-deze-resultaten-voor-het-ontwerp-van-leeromgevingen">Wat
+betekenen deze resultaten voor het ontwerp van leeromgevingen?</h2>
+<p>Naast vragen over transfer roept het praktijkonderzoek ook vragen op
+over het ontwerp van leeromgevingen waarin programmeren als hulpmiddel
+wordt ingezet. Tijdens het ontwerpen van de leeromgeving ontstond een
+spanningsveld tussen twee ontwerpdoelen. Enerzijds moest programmeren
+voldoende toegankelijk zijn om leerlingen ruimte te geven voor analyse,
+interpretatie en besluitvorming. Anderzijds mocht het abstraheren van
+programmeertechnische complexiteit niet leiden tot het verdwijnen van de
+denkprocessen die juist zichtbaar gemaakt moesten worden.</p>
+<p>De ontwikkelde Python-module vormde een concrete uitwerking van deze
+ontwerpkeuze. Door veelvoorkomende programmeertechnische handelingen te
+abstraheren, ontstond meer ruimte voor de vakinhoudelijke opdracht. De
+resultaten laten zien dat deze ontwerpkeuze binnen de onderzochte
+onderwijscontext uitvoerbaar was. De meeste leerlingen waren in staat de
+opdracht zelfstandig of met beperkte ondersteuning uit te voeren.
+Daarmee lijkt het abstraheren van programmeertechnische complexiteit een
+belangrijke voorwaarde om programmeren als hulpmiddel binnen een
+vakinhoudelijke context te kunnen inzetten.</p>
+<p>Tegelijkertijd laten de resultaten zien dat het abstraheren van
+programmeertechnische complexiteit op zichzelf geen garantie biedt voor
+zichtbaar Computational Thinking. Hoewel de technische drempel werd
+verlaagd, bleven computationele denkprocessen zoals abstractie,
+decompositie, generalisatie en evaluatie slechts beperkt zichtbaar. Het
+verminderen van technische complexiteit creëert daarmee ruimte voor
+denken, maar zorgt er niet automatisch voor dat dit denken ook
+daadwerkelijk plaatsvindt.</p>
+<p>De resultaten maken bovendien duidelijk dat niet iedere vorm van
+complexiteit dezelfde functie heeft binnen een leeromgeving. Sommige
+complexiteit is voornamelijk technisch van aard en draagt beperkt bij
+aan het leerdoel. Andere complexiteit is juist cognitief waardevol omdat
+zij leerlingen uitdaagt om informatie te interpreteren, structuren te
+herkennen, keuzes te maken en problemen op te delen. Dit werd zichtbaar
+bij de stap waarin JSON-data moest worden omgezet naar een Pandas
+DataFrame. Juist deze stap vormde voor veel leerlingen een knelpunt. Het
+omzetten van JSON-data naar een DataFrame vraagt niet alleen
+programmeertechnische handelingen, maar ook het herkennen van
+gegevensstructuren en het abstraheren van relevante informatie. Daarmee
+raakt deze activiteit direct aan computationele denkprocessen zoals
+abstractie en decompositie. Het volledig abstraheren van dergelijke
+complexiteit kan de programmeerlast verminderen, maar kan tegelijkertijd
+ook de denkprocessen afschermen die juist onderzocht of gestimuleerd
+moeten worden.</p>
+<p>De ontwerpuitdaging ligt daarom niet in het maximaal abstraheren van
+programmeertechnische complexiteit, maar in het bewust onderscheiden van
+technische complexiteit en cognitief waardevolle complexiteit. Wanneer
+programmeren wordt ingezet als vakdidactisch hulpmiddel, is niet de
+hoeveelheid code die leerlingen schrijven het meest relevant, maar de
+mate waarin het ontwerp van de leeromgeving computationele denkprocessen
+uitlokt en zichtbaar maakt.</p>
+<h2 class="unnumbered"
+id="wat-betekenen-deze-resultaten-voor-digitale-geletterdheid">Wat
+betekenen deze resultaten voor Digitale Geletterdheid?</h2>
+<p>De resultaten van dit onderzoek zijn niet alleen relevant voor het
+ontwerp van leeromgevingen, maar roepen ook vragen op over de
+positionering van Computational Thinking binnen Digitale Geletterdheid.
+De documentanalyse uit hoofdstuk 1 liet zien dat Computational Thinking
+binnen de nieuwe kerndoelen niet langer als afzonderlijk domein wordt
+gepositioneerd, maar geïntegreerd is in activiteiten zoals programmeren,
+modelleren, onderzoeken en ontwerpen. De conceptexamenprogramma's
+veronderstellen vervolgens dat deze denkstrategieën in de bovenbouw
+binnen verschillende vakcontexten toepasbaar zijn.</p>
+<p>De resultaten van dit praktijkonderzoek spreken deze curriculumkeuze
+niet direct tegen. Het onderzoek laat niet zien dat Computational
+Thinking zich niet kan ontwikkelen binnen dergelijke activiteiten. Wel
+laten de resultaten zien dat het uitvoeren van deze activiteiten op
+zichzelf geen garantie biedt voor het zichtbaar worden van de
+onderliggende computationele denkprocessen. Binnen de onderzochte
+onderwijscontext werden deze denkprocessen tijdens het programmeren
+slechts beperkt zichtbaar.</p>
+<p>Juist deze observatie maakt een curriculumvraagstuk zichtbaar.
+Wanneer Computational Thinking voornamelijk impliciet wordt aangeboden,
+rijst de vraag onder welke voorwaarden leerlingen computationele
+denkstrategieën leren herkennen als een samenhangende en overdraagbare
+manier van denken. Vanuit de besproken transfertheorieën is die
+herkenbaarheid relevant, omdat transfer niet alleen vraagt om het
+uitvoeren van activiteiten, maar ook om het bewust herkennen,
+expliciteren en opnieuw inzetten van onderliggende denkstrategieën
+wanneer de context verandert.</p>
+<p>De betekenis van dit onderzoek ligt daarom niet in het weerleggen van
+de uitgangspunten van de kerndoelen, maar in het zichtbaar maken van een
+vraagstuk dat verdere aandacht verdient. Wanneer Computational Thinking
+zich ontwikkelt binnen activiteiten zoals programmeren, modelleren,
+onderzoeken en ontwerpen, onder welke voorwaarden blijven de
+onderliggende denkstrategieën dan herkenbaar en overdraagbaar wanneer
+leerlingen nieuwe vakcontexten tegenkomen? Juist deze vraag verbindt de
+documentanalyse, de transfertheorieën en de resultaten van het
+praktijkonderzoek en vormt daarmee de belangrijkste curriculumimplicatie
+van dit onderzoek.</p>
+<h2 class="unnumbered" id="synthese">Synthese</h2>
+<p>Wanneer de documentanalyse, het theoretisch kader, het ontwerp van de
+leeromgeving en de resultaten van het praktijkonderzoek gezamenlijk
+worden beschouwd, ontstaat een consistent beeld. De resultaten van dit
+onderzoek laten zien dat het uitvoeren van activiteiten waarin
+programmeren, modelleren, onderzoeken of ontwerpen een rol spelen, op
+zichzelf geen garantie biedt voor het zichtbaar worden van
+computationele denkprocessen. Hoewel dergelijke activiteiten een context
+kunnen bieden waarin Computational Thinking zichtbaar kan worden, laten
+zowel de literatuur als de resultaten van dit onderzoek zien dat dit
+geen vanzelfsprekend proces is.</p>
+<p>Het praktijkonderzoek laat zien dat leerlingen
+programmeeractiviteiten konden uitvoeren en een vakinhoudelijke opdracht
+succesvol konden afronden. Tegelijkertijd werden de onderliggende
+computationele denkprocessen slechts beperkt zichtbaar. Deze observatie
+sluit aan bij het onderscheid dat (Wing, 2006) maakt tussen programmeren
+en Computational Thinking en ondersteunt de transfertheorieën van
+(Whitehead, 1929), (Salomon &amp; Perkins, 1989) en (Bransford &amp;
+Schwartz, 1999). Gezamenlijk wijzen zij erop dat transfer niet vanzelf
+ontstaat, maar vraagt om het herkennen, expliciteren en opnieuw inzetten
+van onderliggende denkstrategieën.</p>
+<p>Ook het ontwerp van de leeromgeving levert een belangrijk inzicht op.
+Het abstraheren van programmeertechnische complexiteit blijkt een
+belangrijke voorwaarde om programmeren als vakdidactisch hulpmiddel te
+kunnen inzetten, maar vormt op zichzelf geen garantie voor zichtbaar
+Computational Thinking. Het verminderen van technische complexiteit
+creëert ruimte voor vakinhoudelijk denken, maar vraagt om aanvullende
+ontwerpkeuzes die computationele denkprocessen daadwerkelijk uitlokken
+en zichtbaar maken.</p>
+<p>Daarmee krijgt ook de curriculumvraag uit hoofdstuk 1 nieuwe
+betekenis. Wanneer Computational Thinking binnen Digitale Geletterdheid
+voornamelijk wordt geïntegreerd in activiteiten zoals programmeren,
+modelleren, onderzoeken en ontwerpen, wordt de herkenbaarheid van de
+onderliggende denkstrategieën een belangrijke voorwaarde voor
+vakoverstijgende toepasbaarheid. De resultaten van dit onderzoek spreken
+deze curriculumkeuze niet tegen, maar laten wel zien dat het uitvoeren
+van dergelijke activiteiten op zichzelf geen garantie biedt voor het
+zichtbaar worden van Computational Thinking.</p>
+<p>De centrale opbrengst van dit onderzoek is daarom niet de conclusie
+dat programmeren onvoldoende is of dat bestaande curriculumkeuzes
+onjuist zijn. De centrale opbrengst is het zichtbaar maken van een
+spanning tussen het veronderstellen van vakoverstijgende toepasbaarheid
+en het expliciet ondersteunen van de transfer die daarvoor noodzakelijk
+is. Juist in die spanning ligt een belangrijke ontwerp- en
+curriculumvraag voor de verdere ontwikkeling van Computational Thinking
+binnen Digitale Geletterdheid.</p>
+<p>Main()</p>
+<p>Deze analyse maakt aannemelijk dat de beperkte transfer van Digitale
+Geletterdheid en Computational Thinking naar nieuwe vakcontexten niet
+per se samenvalt met een tekort aan kennis of vaardigheden bij
+leerlingen. In de onderbouw leren zij problemen analyseren, structuren
+herkennen en oplossingen formuleren als onderdeel van een computationele
+manier van denken. Die manier van denken wordt geoefend, benoemd en
+herhaald.</p>
+<p>Tot op het punt waarop wordt verondersteld dat deze denkwijze vanzelf
+beschikbaar blijft, ook wanneer de context én de herkenbaarheid ervan
+verdwijnen. In de bovenbouw is Digitale Geletterdheid geen leergebied
+meer, maar een veronderstelling. Het moet functioneren binnen vakken,
+zonder dat expliciet wordt vastgelegd wanneer, door wie of op welke
+manier Digitale Geletterdheid en Computational Thinking opnieuw wordt
+aangesproken.</p>
+<p>Daardoor verschuift de vraag. Niet zozeer of leerlingen deze
+denkstrategieën beheersen, maar of zij — en hun docenten — het moment
+herkennen waarop inzet ervan betekenisvol is. Die herkenning is geen
+vanzelfsprekendheid. Zij vraagt om ontwerp, om timing, en om ruimte die
+daadwerkelijk gebruikt kan worden.</p>
+<p>Het praktijkonderzoek suggereert dat juist daar de uitdaging ligt. De
+benodigde programmeerkennis bleek aanwezig en uitvoerbaar. Wat zichtbaar
+werd, was het uitvoeren van de procedure; wat grotendeels verborgen
+bleef, was de manier van denken die deze procedure betekenis geeft. De
+code draaide. De transfer liet zich minder eenvoudig aanroepen.</p>
+<p>Juist daar ontstaat spanning wanneer beleid zich vooral uitdrukt in
+algemene formuleringen die ruimte laten voor interpretatie, maar weinig
+richting geven aan uitvoering. De taal functioneert als kader, terwijl
+de functie die zij moet dragen — het moment waarop herkenning, gebruik
+en transfer plaatsvinden — grotendeels onbepaald blijft.</p>
+<p>def
+beleid(functionele_verankering_van_digitale_geletterdheid_in_de_bovenbouw):</p>
+<p>raise NotImplementedError</p>
+<p>Formeel klopt alles.</p>
+<p>Maar er gebeurt niets.</p>
+<p>transfer(computationalThinking)</p>
+<p>Daartegenover staat een functie die eerder is gedefinieerd, geoefend
+en bekend is. Doordacht opgebouwd, maar niet dichtgeregeld, beschikbaar
+op het moment dat deze nodig is.</p>
+<p>Succesvolle Digitale Geletterdheid in de bovenbouw vraagt daarom
+minder om verdere specificatie, en meer om aandacht voor het moment van
+aanroep. Niet om extra boilerplates zoals beleidsstukken en visies, maar
+om onderwijsontwerp dat herkent wanneer deze manier van denken opnieuw
+betekenis krijgt.</p>
+<p><span id="_Toc233619003" class="anchor"></span>Bibliography</p>
+<p>Bransford, J. D., Brown, A. L., &amp; Cocking, R. R. (Eds.). (2000).
+<em>How People Learn: Brain, Mind, Experience, and School: Expanded
+Edition</em> (p. 9853). National Academies Press.
+https://doi.org/10.17226/9853</p>
+<p>Bransford, J. D., &amp; Schwartz, D. L. (1999). Rethinking Transfer:
+A Simple Proposal with Multiple Implications. <em>Review of Research in
+Education</em>, <em>24</em>, 61–100.</p>
+<p>Doorman, M., Drijvers, P., Dekker, T., Van Den Heuvel-Panhuizen, M.,
+De Lange, J., &amp; Wijers, M. (2007). Problem solving as a challenge
+for mathematics education in The Netherlands. <em>ZDM</em>,
+<em>39</em>(5–6), 405–418. https://doi.org/10.1007/s11858-007-0043-2</p>
+<p>Kennisnet. (2022, May 3). <em>Digitale geletterdheid: Een korte
+bijscholing volstaat niet meer</em>. Kennisnet.
+https://www.kennisnet.nl/digitale-geletterdheid/digitale-geletterdheid-een-korte-bijscholing-of-projectweek-volstaat-niet-meer/</p>
+<p>Salomon, G., &amp; Perkins, D. N. (1989). Rocky Roads to Transfer:
+Rethinking Mechanism of a Neglected Phenomenon. <em>Educational
+Psychologist</em>, <em>24</em>(2), 113–142.
+https://doi.org/10.1207/s15326985ep2402_1</p>
+<p>Selby, C., &amp; Woollard, J. (2013). <em>Computational Thinking: The
+Developing Definition</em> (p. 6). University of Southampton.
+https://eprints.soton.ac.uk/356481/</p>
+<p>SLO. (2023, October 25). <em>Over digitale geletterdheid</em>
+[Overzichtspagina]. SLO. SLO.
+https://www.slo.nl/sectoren/vmbo/digitale-geletterdheid-vmbo/digitale-geletterdheid-vo/digitale-geletterdheid/</p>
+<p>SLO. (2024). <em>Startnotitie mens en maatschappij. Bovenbouw
+voortgezet onderwijs</em>. SLO.
+https://www.slo.nl/publish/pages/22114/startnotitie-mens-en-maatschappij.pdf</p>
+<p>SLO. (2025a). <em>Conceptexamenprogramma O&amp;O vwo</em>. SLO.
+https://www.slo.nl/publish/pages/22468/conceptexamenprogramma-oo-vwo.pdf</p>
+<p>SLO. (2025b). <em>Conceptexamenprogramma wiskunde maatschappij
+C&amp;M - vwo (versie 2)</em>. SLO.
+https://www.slo.nl/publish/pages/22940/conceptexamenprogramma-wiskunde-maatschappij-cm_versie-2_vwo_1.pdf</p>
+<p>SLO. (2025c). <em>Conceptexamenprogramma wiskunde maatschappij
+E&amp;M - vwo (versie 2)</em>. SLO.
+https://www.slo.nl/publish/pages/22942/conceptexamenprogramma-wiskunde-maatschappij-em_versie-2_vwo.pdf</p>
+<p>SLO. (2025d). <em>Conceptexamenprogramma wiskunde natuur N&amp;G -
+vwo (versie 2)</em>. SLO.
+https://www.slo.nl/publish/pages/22944/conceptexamenprogramma-wiskunde-natuur-ng_versie-2-vwo.pdf</p>
+<p>SLO. (2025e). <em>Conceptexamenprogramma wiskunde natuur N&amp;T -
+vwo (versie 2)</em>. SLO.
+https://www.slo.nl/publish/pages/22945/conceptexamenprogramma-wiskunde-natuur-nt_versie-2_vwo.pdf</p>
+<p>SLO. (2025f). <em>Definitieve conceptkerndoelen Digitale
+geletterdheid: Inclusief toelichtingsdocument</em>. SLO.
+https://www.slo.nl/publish/pages/22984/definitieve-conceptkerndoelen-digitale_geletterdheid-inclusief-toelichtingsdocument.pdf</p>
+<p>SLO. (2025g). <em>Toelichtingsdocument conceptexamenprogramma’s
+wiskunde maatschappij en wiskunde natuur voor havo-vwo (versie 2)</em>.
+SLO.
+https://www.slo.nl/publish/pages/22946/toelichtingsdocument-conceptexamenprogramma-wiskunde-maatschappij-en-wiskunde-natuur_versie-2.pdf</p>
+<p>SLO. (2026a). <em>Conceptexamenprogramma Biologie vwo, versie 2</em>.
+SLO.
+https://www.slo.nl/publish/pages/22463/conceptexamenprogramma-biologie-vwo-versie-2.pdf</p>
+<p>SLO. (2026b). <em>Conceptexamenprogramma Natuurkunde vwo, versie
+2</em>. SLO.
+https://www.slo.nl/publish/pages/22472/conceptexamenprogramma-natuurkunde-vwo-versie-2.pdf</p>
+<p>SLO. (2026c). <em>Conceptexamenprogramma Scheikunde vwo, versie
+2</em>. SLO.
+https://www.slo.nl/publish/pages/22475/conceptexamenprogramma-scheikunde-vwo-versie-2.pdf</p>
+<p>SLO. (2026d). <em>Toelichtingsdocument conceptexamenprogramma’s
+natuurwetenschappelijke vakken, versie 2</em>. SLO.
+https://www.slo.nl/publish/pages/22491/toelichtingsdocument-conceptexamenprogrammas-natuurwetenschappelijke_vakken-v2.pdf</p>
+<p>SLO. (2026e, June 1). <em>Vier of drie domeinen?</em>
+[Overzichtspagina]. SLO. SLO.
+https://www.slo.nl/sectoren/vmbo/digitale-geletterdheid-vmbo/digitale-geletterdheid-vo/digitale-geletterdheid/vier-drie-domeinen/</p>
+<p>Smits, A. (2023, July 24). Lector Anneke Smits: “Voorkom dat je
+digitale geletterdheid weg integreert.” <em>Kennisnet</em>.
+https://www.kennisnet.nl/opinie/lector-anneke-smits-voorkom-dat-je-digitale-geletterdheid-weg-integreert/</p>
+<p>Whitehead, A. N. (1929). <em>The Aims of Education and Other
+Essays</em>.</p>
+<p>Wing, J. (2006). Computational thinking. <em>Communications of the
+ACM</em>, <em>49</em>(3), 33–35.
+https://doi.org/10.1145/1118178.1118215</p>
+<p>Wing, J. (2020). <em>CTiS 2020 - Computational Thinking: Prof.
+Jeannette Wing, Columbia University, NY</em> [Video recording].
+https://www.youtube.com/watch?v=bS7kAe2GUqo</p>
+<p>Zegveld, L. (2022, August 1). Integreer digitale geletterdheid in
+bestaande vakken. <em>AG Connect</em>.
+https://www.agconnect.nl/maatschappij/wetenschap/integreer-digitale-geletterdheid-in-bestaande-vakken</p>
+<h1 class="unnumbered" id="section"><br />
+</h1>
+<h1 id="appendices"> Appendices</h1>
+<h2 class="unnumbered" id="appendix-i-observatieformulier">Appendix I –
+Observatieformulier</h2>
+<p><img src="media/image2.png"
+style="width:6.26806in;height:4.02708in" /></p>
+<h2 class="unnumbered"
+id="appendix-ii-overzichtstabel-observaties">Appendix II –
+Overzichtstabel observaties</h2>
+<h2 class="unnumbered" id="section-1"></h2>
+<h2 class="unnumbered" id="section-2"><img
+src="media/image3.png"
+style="width:8.95872in;height:3.29327in" /><br />
+</h2>
+<h2 class="unnumbered"
+id="appendix-iii-uitwerking-jupyter-notebook-opdracht">Appendix III –
+Uitwerking Jupyter Notebook Opdracht </h2>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="media/image4.png"
+style="width:6.26806in;height:2.90764in" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="media/image5.png"
+style="width:6.26806in;height:3.36944in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image6.png"
+style="width:6.26806in;height:2.93333in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image7.png"
+style="width:6.26806in;height:3.92083in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image8.png"
+style="width:6.26806in;height:2.88333in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image9.png"
+style="width:6.26806in;height:3.9125in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image10.png"
+style="width:6.26806in;height:2.52778in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image11.png"
+style="width:6.26806in;height:5.06528in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image12.png"
+style="width:6.26806in;height:2.86736in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image13.png"
+style="width:6.26806in;height:3.10208in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image14.png"
+style="width:6.26806in;height:3.33264in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image15.png"
+style="width:6.26806in;height:3.10625in" /></td>
+</tr>
+<tr class="even">
+<td><img src="media/image16.png"
+style="width:6.26806in;height:3.12222in" /></td>
+</tr>
+<tr class="odd">
+<td><img src="media/image17.png"
+style="width:6.26806in;height:3.20139in" /></td>
+</tr>
+</tbody>
+</table>
+<h2 class="unnumbered"
+id="appendix-iv-python-module-documentatie">Appendix IV – Python Module
+Documentatie </h2>
+<p><strong><br />
+</strong><img src="media/image18.png"
+style="width:6.26806in;height:8.90972in" /></p>
+<p><strong><br />
+</strong></p>
+<p><img src="media/image19.png"
+style="width:6.26806in;height:8.32083in" /></p>
+<p><strong><br />
+</strong></p>
+<p><img src="media/image20.png"
+style="width:6.26806in;height:8.54167in" /></p>
+<p><strong><br />
+</strong></p>
+<p><img src="media/image21.png"
+style="width:6.26806in;height:9.11181in" /></p>
+<p><img src="media/image22.png"
+style="width:6.26806in;height:9.50764in" /></p>
+<p><img src="media/image23.png"
+style="width:6.26806in;height:8.56944in" /></p>
+<p><img src="media/image24.png"
+style="width:6.26806in;height:9.50764in" /></p>
+<p><img src="media/image25.png"
+style="width:6.26806in;height:3.03264in" /></p>
+<h2 class="unnumbered" id="appendix-v-leeromgeving">Appendix V –
+Leeromgeving </h2>
+<p><strong>Opdrachten en programmeeromgeving</strong><br />
+De leeromgeving start vanuit een opdrachtenpagina waarin leerlingen
+programmeeropdrachten uitvoeren rondom het analyseren van financiële
+data.</p>
+<p>De opdrachten verwijzen naar een geïntegreerde Jupyter-omgeving
+waarin leerlingen Python-code uitvoeren om datasets op te halen en te
+analyseren.</p>
+<p>Hierdoor werken leerlingen niet alleen met uitleg, maar voeren zij
+direct programmeeropdrachten uit en zien zij het resultaat van hun
+analyse.</p>
+<p>Didactische functie:</p>
+<p>De opdrachten stimuleren leerlingen om datasets te analyseren en
+eigen conclusies te trekken uit de resultaten van hun code.</p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><h1 id="section-3"></h1>
+<p><img src="media/image26.png"
+style="width:5.90833in;height:2.83333in" /></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="media/image27.png"
+style="width:5.90833in;height:2.64167in" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyseren van datasets</strong></p>
+<p>Leerlingen kiezen een aandeel en laden historische koersdata.</p>
+<p>De applicatie toont vervolgens verschillende analysegegevens, zoals
+grafieken, gemiddelde prijs en volatiliteit.</p>
+<p>Op basis van deze informatie kunnen leerlingen trends herkennen en
+nadenken over mogelijke strategieën.</p>
+<p>Didactische functie:</p>
+<p>De analysefase stimuleert leerlingen om data te interpreteren en
+patronen te herkennen voordat zij een beslissing nemen.</p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="media/image28.png"
+style="width:5.90833in;height:2.675in" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="media/image29.png"
+style="width:5.90833in;height:2.71667in" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Strategie en besluitvorming</strong><br />
+<br />
+Na het analyseren van de data bepalen leerlingen hun strategie.</p>
+<p>Zij kiezen hoeveel aandelen zij willen kopen of verkopen en kunnen
+daarnaast een eigen plan formuleren, bijvoorbeeld een minimale
+verkoopprijs of maximale aankoopprijs.</p>
+<p>Voordat een transactie wordt uitgevoerd vraagt het systeem om
+bevestiging van de keuze.</p>
+<p>Didactische functie:</p>
+<p>Leerlingen vertalen hun analyse naar een concrete strategie en
+evalueren hun keuzes voordat zij een beslissing uitvoeren.</p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="media/image30.png"
+style="width:6.26667in;height:2.53333in" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="media/image31.png"
+style="width:5.90833in;height:2.75in" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Feedback tijdens het leerproces</strong><br />
+<br />
+Tijdens het uitvoeren van transacties geeft de leeromgeving directe
+feedback.</p>
+<p>Voorbeelden hiervan zijn meldingen wanneer invoer ontbreekt,
+waarschuwingen wanneer een strategie mogelijk niet logisch is en
+bevestigingen wanneer een transactie is uitgevoerd.</p>
+<p>Deze feedback helpt leerlingen om hun keuzes te controleren en hun
+strategie zo nodig aan te passen.</p>
+<p>Didactische functie:</p>
+<p>De directe feedback ondersteunt leerlingen bij het evalueren van hun
+keuzes en stimuleert reflectie op hun strategie.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><img src="media/image32.png"
+style="width:2.725in;height:1.45in" /></th>
+<th><img src="media/image33.png"
+style="width:2.975in;height:1.54167in" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="media/image34.png"
+style="width:2.13333in;height:1.36667in" /></td>
+<td><img src="media/image35.png"
+style="width:2.15in;height:1.36667in" /></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
